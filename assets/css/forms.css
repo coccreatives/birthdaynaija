@@ -101,14 +101,34 @@
 .btn[hidden] { display: none; }
 body.is-locked { overflow: hidden; }
 
+/* Mobile: the form is its own full-screen page, not a popup card.
+   A bottom sheet on a short mobile viewport let the close button and
+   header get pushed above the visible screen. This instead takes over
+   the whole screen like the hamburger menu, with the cancel/back
+   controls pinned so they're always reachable. */
 @media (max-width: 767px) {
-  .modal { padding: 0; align-items: flex-end; }
-  .modal__card { max-width: none; max-height: 94vh; border-radius: 16px 16px 0 0; border-bottom: 0; }
-  .modal__head { padding: 22px 20px 16px; }
+  .modal { padding: 0; align-items: stretch; }
+  .modal__backdrop { display: none; }
+  .modal__card {
+    max-width: none; width: 100%; height: 100dvh; max-height: 100dvh;
+    border-radius: 0; border: 0; box-shadow: none;
+    animation: bnSlideIn .35s var(--ease);
+  }
+  .modal__close {
+    top: 14px; right: 14px; z-index: 2;
+    width: 38px; height: 38px; font-size: 20px;
+    background: var(--grey-100);
+  }
+  .modal__head { position: sticky; top: 0; z-index: 1; padding: 18px 56px 16px 20px; background: #fff; }
   .modal__title { font-size: 20px; }
-  .modal__body { padding: 18px 20px; }
-  .modal__foot { padding: 14px 20px 20px; flex-wrap: wrap; }
+  .modal__body { padding: 18px 20px 24px; flex: 1 1 auto; }
+  .modal__foot {
+    position: sticky; bottom: 0; z-index: 1; background: #fff;
+    padding: 14px 20px calc(20px + env(safe-area-inset-bottom)); flex-wrap: wrap;
+  }
   .modal__foot .btn { flex: 1; justify-content: center; }
   .row { grid-template-columns: 1fr; }
   .done { padding: 36px 20px; }
 }
+
+@keyframes bnSlideIn { from { opacity: 0; transform: translateX(24px) } to { opacity: 1; transform: none } }
