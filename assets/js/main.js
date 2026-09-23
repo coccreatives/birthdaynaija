@@ -48,9 +48,9 @@
     wallVisible: 8,
     /* Slides for the "Celebrate anyone" panel */
     slides: [
-      { badge: 'BIRTHDAY WISHES', text: 'We celebrate you with a custom video shoutout, your name, your moment, made just for you.', cta: 'Book a shoutout', href: '#plans', form: 'celebrate', pkg: 'video' },
-      { badge: 'FOR BUSINESSES', text: 'Celebrate your staff and customers with branded shoutouts, sponsored Wall sections and birthday campaigns.', cta: 'Partner with us', href: '#contact', form: 'business' },
-      { badge: 'GIFTS AND EXPERIENCES', text: 'Send a gift box or a special birthday experience, and we make sure it lands on the day.', cta: 'Send a gift', href: '#plans', form: 'gift' }
+      { badge: 'BIRTHDAY WISHES', text: 'We celebrate you with a custom video shoutout, your name, your moment, made just for you.', cta: 'Book a shoutout', href: 'form.html?plan=oneoff' },
+      { badge: 'FOR BUSINESSES', text: 'Celebrate your staff and customers with branded shoutouts, sponsored Wall sections and birthday campaigns.', cta: 'Partner with us', href: 'form.html?flow=business' },
+      { badge: 'GIFTS AND EXPERIENCES', text: 'Send a gift box or a special birthday experience, and we make sure it lands on the day.', cta: 'Send a gift', href: 'form.html?flow=gift' }
     ]
   };
 
@@ -113,9 +113,9 @@
     if (!p) return;
     card.classList.toggle('plan--popular', !!p.popular);
     var ctaExtra = {
-      oneoff: ' href="#checkout" data-form="celebrate" data-package="wall"',
-      club: ' href="#checkout" data-form="club" data-package="club"',
-      group: ' href="#checkout" data-form="group" data-package="group"'
+      oneoff: ' href="form.html?plan=oneoff"',
+      club: ' href="form.html?plan=club"',
+      group: ' href="form.html?plan=group"'
     };
     card.innerHTML = window.BN_renderPlanCard(p, { ctaTag: 'a', ctaAttrs: ctaExtra[key] || '' });
   });
@@ -283,8 +283,6 @@
       var cta = $('[data-slide-cta]', panel);
       cta.textContent = s.cta;
       cta.setAttribute('href', s.href);
-      if (s.form) { cta.setAttribute('data-form', s.form); } else { cta.removeAttribute('data-form'); }
-      if (s.pkg) { cta.setAttribute('data-package', s.pkg); } else { cta.removeAttribute('data-package'); }
       pagers.forEach(function (root) {
         $$('[data-count]', root).forEach(function (c) { c.textContent = pad(idx + 1) + ' / ' + pad(slides.length); });
         $$('.pager__dot', root).forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
