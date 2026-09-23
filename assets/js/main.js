@@ -116,6 +116,32 @@
     }
   }
 
+  /* ---------- Section videos: force-start autoplay ----------
+     The autoplay/muted/playsinline attributes alone are sometimes
+     silently ignored by mobile browsers (the poster just sits there).
+     Setting .muted in JS and calling .play() explicitly is the
+     reliable way to get it going, and we retry on first touch/scroll
+     in case the browser blocked the very first attempt. */
+  (function () {
+    var vids = $$('.panel__video');
+    if (!vids.length) return;
+    var kick = function () {
+      vids.forEach(function (v) {
+        v.muted = true;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    };
+    kick();
+    ['touchstart', 'scroll', 'click'].forEach(function (evt) {
+      document.addEventListener(evt, kick, { once: true, passive: true });
+    });
+    vids.forEach(function (v) {
+      v.addEventListener('loadeddata', kick);
+      v.addEventListener('canplay', kick);
+    });
+  })();
+
   /* ---------- Sticky nav shadow ---------- */
   var nav = $('.nav');
   var onScroll = function () { nav.classList.toggle('is-scrolled', window.scrollY > 8); };

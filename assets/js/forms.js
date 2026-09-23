@@ -251,21 +251,52 @@
   var btnNext = $('[data-m-next]', modal);
 
   var state = { flow: null, key: '', step: 0, data: {}, opener: null };
+  var modalTimer = null;
+  var savedScrollY = 0;
+
+  /* True iOS-safe scroll lock: overflow:hidden alone lets the page behind
+     rubber-band/scroll while a fixed overlay is open, which is what was
+     making the modal header appear to vanish. Pinning the body with
+     position:fixed stops that entirely. */
+  function lockScroll() {
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.classList.add('is-locked');
+  }
+  function unlockScroll() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.classList.remove('is-locked');
+    window.scrollTo(0, savedScrollY);
+  }
 
   function open(key, preset) {
     var flow = FLOWS[key];
     if (!flow) return;
     state = { flow: flow, key: key, step: 0, data: Object.assign({}, preset || {}), opener: document.activeElement };
+    clearTimeout(modalTimer);
     modal.hidden = false;
-    document.body.classList.add('is-locked');
+    lockScroll();
     render();
+    // next frame, so the transition has a start value to animate from
+    requestAnimationFrame(function () { requestAnimationFrame(function () { modal.classList.add('is-open'); }); });
   }
 
   function close() {
-    modal.hidden = true;
-    document.body.classList.remove('is-locked');
-    elFoot.hidden = false;
+    if (modal.hidden) return;
+    clearTimeout(modalTimer);
+    modal.classList.remove('is-open');
+    unlockScroll();
     if (state.opener && state.opener.focus) state.opener.focus();
+    // keep it in the flow until the slide/fade-out finishes, then take it out
+    modalTimer = setTimeout(function () { modal.hidden = true; elFoot.hidden = false; }, 400);
   }
 
   function price() {
