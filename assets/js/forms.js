@@ -282,29 +282,20 @@
   }
 
   function paywallBlock() {
-    var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
     var wrap = document.createElement('div');
     wrap.className = 'paywall';
+    // Reuses the exact same card markup as the Plans section (window.BN_renderPlanCard,
+    // built from the Figma pricing-card spec), just with a <button> CTA instead of a link
+    // so picking a tier here switches the flow instead of navigating.
     wrap.innerHTML =
       '<div class="paywall__grid">' +
       TIERS.map(function (t) {
         var p = tierData(t.key);
         var active = state.data.package === t.package;
-        var include = (p.include || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
-        var excludeBlock = (p.exclude && p.exclude.length)
-          ? '<p class="paywall__label">Not included</p><ul class="paywall__list paywall__list--out">' +
-            p.exclude.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'
-          : (p.excludeNote ? '<p class="paywall__note">' + esc(p.excludeNote) + '</p>' : '');
-        return '<div class="paywall__card' + (active ? ' is-active' : '') + (p.popular ? ' is-popular' : '') + '">' +
-          (p.popular ? '<span class="paywall__badge">Most popular</span>' : '') +
-          '<p class="paywall__num">' + esc(p.name || '') + '</p>' +
-          '<p class="paywall__price"><b>' + NGN(p.amount || 0) + '</b><span>' + esc(p.unit || '') + '</span></p>' +
-          '<p class="paywall__tag">' + esc(p.tagline || p.summary || '') + '</p>' +
-          '<p class="paywall__label">What you get</p>' +
-          '<ul class="paywall__list">' + include + '</ul>' +
-          excludeBlock +
-          '<button type="button" class="btn btn--grad paywall__cta" data-tier-btn="' + t.key + '">' + esc(p.cta || 'Choose') + '</button>' +
-          '</div>';
+        var cardHTML = window.BN_renderPlanCard
+          ? window.BN_renderPlanCard(p, { ctaTag: 'button', ctaAttrs: ' type="button" data-tier-btn="' + t.key + '"' })
+          : '';
+        return '<div class="plan paywall__card' + (active ? ' is-active' : '') + (p.popular ? ' plan--popular' : '') + '">' + cardHTML + '</div>';
       }).join('') +
       '</div>';
     wrap.addEventListener('click', function (e) {

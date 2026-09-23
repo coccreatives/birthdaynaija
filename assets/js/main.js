@@ -17,7 +17,7 @@
        share it automatically. */
     pricing: {
       oneoff: {
-        name: '1. One Off', amount: 500, prefix: '', unit: '/ one time', unitShort: '',
+        name: 'One Off', amount: 500, prefix: '', unit: '/ one time', unitShort: '',
         tagline: 'Perfect for trying it out.',
         include: ['Birthday Wall entry', 'Shoutout', 'Choose your own challenge'],
         exclude: ['Wall slot', 'Priority booking', 'Automatic yearly renewal', 'Family and sibling coverage'],
@@ -25,7 +25,7 @@
         cta: 'Book once'
       },
       club: {
-        name: '2. Club Member', amount: 15000, prefix: '', unit: '/ year', unitShort: '/yr',
+        name: 'Club Member', amount: 15000, prefix: '', unit: '/ year', unitShort: '/yr',
         tagline: 'For members who want more access and exclusive benefits.',
         include: ['Everything in One Off', 'Dedicated wall slot', 'Shoutout', 'Priority booking', 'Automatic renewal every year'],
         exclude: ['Family and sibling coverage', 'Whole house membership'],
@@ -34,7 +34,7 @@
         popular: true
       },
       group: {
-        name: '3. Family / Group', amount: 45000, prefix: '', unit: '/ year', unitShort: '/yr',
+        name: 'Family / Group', amount: 45000, prefix: '', unit: '/ year', unitShort: '/yr',
         tagline: 'For families who want to enjoy the benefits together.',
         include: ['Everything in Club Member', 'Cover parents', 'Cover siblings', 'Cover the whole house', 'Priority booking', 'Dedicated wall slot', 'Automatic yearly renewal'],
         exclude: [],
@@ -75,36 +75,41 @@
     });
   };
 
-  /* ---------- Pricing render ---------- */
+  /* ---------- Pricing render (matches the Figma pricing-card spec) ---------- */
+  var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
+  window.BN_renderPlanCard = function (p, opts) {
+    opts = opts || {};
+    var popular = !!p.popular;
+    var include = (p.include || []).map(function (f) {
+      return '<div class="plan__row-item"><span class="plan__ind plan__ind--in">✓</span><p>' + esc(f) + '</p></div>';
+    }).join('');
+    var excludeBody = (p.exclude && p.exclude.length)
+      ? (p.exclude.map(function (f) {
+          return '<div class="plan__row-item"><span class="plan__ind plan__ind--out">✕</span><p class="is-muted">' + esc(f) + '</p></div>';
+        }).join(''))
+      : (p.excludeNote ? '<p class="plan__excludenote">' + esc(p.excludeNote) + '</p>' : '');
+    var ctaAttrs = opts.ctaAttrs || '';
+    return (
+      '<div class="plan__badgerow"><span class="plan__badge' + (popular ? ' plan__badge--dark' : '') + '">' + esc(p.name) + '</span></div>' +
+      '<div class="plan__price"><b>' + fmt(p.amount) + '</b><span>' + esc(p.unit) + '</span></div>' +
+      '<p class="plan__tag">' + esc(p.tagline || p.summary || '') + '</p>' +
+      '<hr class="plan__hr">' +
+      '<div class="plan__section"><p class="plan__label">What you get</p><div class="plan__rows">' + include + '</div></div>' +
+      '<div class="plan__section"><p class="plan__label">Not included</p><div class="plan__rows">' + excludeBody + '</div></div>' +
+      '<div class="plan__ctawrap"><' + (opts.ctaTag || 'a') + ' class="plan__cta' + (popular ? ' plan__cta--grad' : ' plan__cta--dark') + '"' + ctaAttrs + '>' + esc(p.cta) + '</' + (opts.ctaTag || 'a') + '></div>'
+    );
+  };
   $$('[data-plan]').forEach(function (card) {
-    var p = BN_CONFIG.pricing[card.getAttribute('data-plan')];
+    var key = card.getAttribute('data-plan');
+    var p = BN_CONFIG.pricing[key];
     if (!p) return;
-    var set = function (k, v) { var el = $('[data-f="' + k + '"]', card); if (el) el.textContent = v; };
-    set('name', p.name);
-    set('price', p.prefix + fmt(p.amount));
-    set('unit', p.unit);
-    set('priceShort', p.prefix + fmt(p.amount) + p.unitShort);
-    set('summary', p.tagline || p.summary);
-    set('cta', p.cta);
-    var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
-    var list = $('[data-f="features"]', card);
-    if (list) list.innerHTML = (p.include || []).map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('');
-    var outWrap = $('[data-f="exclude-wrap"]', card);
-    var outList = $('[data-f="exclude"]', card);
-    if (outList) {
-      if (p.exclude && p.exclude.length) {
-        outList.hidden = false;
-        outList.innerHTML = p.exclude.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('');
-        if (outWrap) outWrap.hidden = false;
-      } else {
-        outList.hidden = true;
-        if (outWrap) outWrap.hidden = true;
-      }
-    }
-    var note = $('[data-f="exclude-note"]', card);
-    if (note) { note.hidden = !p.excludeNote; if (p.excludeNote) note.textContent = p.excludeNote; }
     card.classList.toggle('plan--popular', !!p.popular);
-    $('.plan__inner', card).setAttribute('data-name', p.name);
+    var ctaExtra = {
+      oneoff: ' href="#checkout" data-form="celebrate" data-package="wall"',
+      club: ' href="#checkout" data-form="club" data-package="club"',
+      group: ' href="#checkout" data-form="group" data-package="group"'
+    };
+    card.innerHTML = window.BN_renderPlanCard(p, { ctaTag: 'a', ctaAttrs: ctaExtra[key] || '' });
   });
   $$('[data-price="oneoff.amount"]').forEach(function (el) { el.textContent = fmt(BN_CONFIG.pricing.oneoff.amount); });
 

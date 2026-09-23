@@ -234,54 +234,18 @@
 <section class="plans" id="plans">
   <div class="container">
     <div class="plans__head">
-      <p class="eyebrow reveal">Plans and pricing</p>
+      <p class="eyebrow reveal">Plans</p>
       <h2 class="h-xl plans__title reveal">Pick a plan. Or pick one moment.</h2>
+      <p class="plans__sub reveal">Get access to experiences, exclusive benefits, and meaningful connections. Choose the plan that fits you best.</p>
     </div>
+    <!-- Cards are built from BN_CONFIG.pricing in assets/js/main.js (renderPlanCard), so the
+         markup exactly matches the Figma pricing-card spec without hand-duplicating it 3 times. -->
     <div class="plans__grid">
-      <article class="plan reveal" data-plan="oneoff">
-        <div class="plan__inner">
-          <img class="plan__img" src="assets/img/package-oneoff.webp" alt="" width="700" height="467" loading="lazy">
-          <div class="plan__row"><p class="plan__name" data-f="name">1. One Off</p><p class="plan__price"><b data-f="price">₦500</b><span data-f="unit">/ one time</span></p></div>
-          <p class="plan__price-m" data-f="priceShort">₦500</p>
-          <p class="plan__desc" data-f="summary"></p>
-          <p class="plan__label">What you get</p>
-          <ul class="plan__list" data-f="features"></ul>
-          <p class="plan__label" data-f="exclude-wrap">Not included</p>
-          <ul class="plan__list plan__list--out" data-f="exclude"></ul>
-          <p class="plan__note" data-f="exclude-note" hidden></p>
-          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="celebrate" data-package="wall">Book once</a>
-        </div>
-      </article>
-      <article class="plan reveal" data-plan="club">
-        <span class="plan__popular">Most popular</span>
-        <div class="plan__inner">
-          <img class="plan__img" src="assets/img/package-club.webp" alt="" width="700" height="467" loading="lazy">
-          <div class="plan__row"><p class="plan__name" data-f="name">2. Club Member</p><p class="plan__price"><b data-f="price">₦15,000</b><span data-f="unit">/ year</span></p></div>
-          <p class="plan__price-m" data-f="priceShort">₦15,000/yr</p>
-          <p class="plan__desc" data-f="summary"></p>
-          <p class="plan__label">What you get</p>
-          <ul class="plan__list" data-f="features"></ul>
-          <p class="plan__label" data-f="exclude-wrap">Not included</p>
-          <ul class="plan__list plan__list--out" data-f="exclude"></ul>
-          <p class="plan__note" data-f="exclude-note" hidden></p>
-          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="club" data-package="club">Join the Club</a>
-        </div>
-      </article>
-      <article class="plan reveal" data-plan="group">
-        <div class="plan__inner">
-          <img class="plan__img" src="assets/img/package-family.webp" alt="" width="700" height="467" loading="lazy">
-          <div class="plan__row"><p class="plan__name" data-f="name">3. Family / Group</p><p class="plan__price"><b data-f="price">₦45,000</b><span data-f="unit">/ year</span></p></div>
-          <p class="plan__price-m" data-f="priceShort">₦45,000/yr</p>
-          <p class="plan__desc" data-f="summary"></p>
-          <p class="plan__label">What you get</p>
-          <ul class="plan__list" data-f="features"></ul>
-          <p class="plan__label" data-f="exclude-wrap">Not included</p>
-          <ul class="plan__list plan__list--out" data-f="exclude"></ul>
-          <p class="plan__note" data-f="exclude-note" hidden></p>
-          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="group" data-package="group">Get a group plan</a>
-        </div>
-      </article>
+      <article class="plan reveal" data-plan="oneoff"></article>
+      <article class="plan reveal" data-plan="club"></article>
+      <article class="plan reveal" data-plan="group"></article>
     </div>
+    <p class="plans__guarantee reveal">Have questions? Contact our dedicated support team at <a href="mailto:support@birthdaynaija.com">support@birthdaynaija.com</a></p>
   </div>
 </section>
 
