@@ -173,16 +173,22 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 32px;
-  padding: 12px 24px 32px;
+  gap: 24px;
+  padding: 12px 24px 28px;
   background: #0a0a0a;
   overflow-y: auto;
+  overflow-x: hidden;
   overscroll-behavior: contain;
   opacity: 0;
   transform: translateX(100%);
   transition: transform .5s var(--ease), opacity .4s var(--ease);
   will-change: transform, opacity;
+  /* Content is sized to fit one screen; scrolling is a fallback for very
+     short viewports, not something we want a visible scrollbar for. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.mobile-menu::-webkit-scrollbar { display: none; }
 .mobile-menu[hidden] { display: none; }
 .mobile-menu.is-open { opacity: 1; transform: translateX(0); }
 body.menu-open { overflow: hidden; }
@@ -193,7 +199,9 @@ body.menu-open { overflow: hidden; }
 .mobile-menu__glow--gold { right: -70px; bottom: 140px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,142,83,.55), transparent 70%); }
 
 .mobile-menu__top { position: relative; z-index: 1; flex: none; height: 68px; display: flex; align-items: center; justify-content: space-between; }
-.brand--menu { --lg: .82; color: #fff; }
+/* Higher specificity than the mobile ".brand { color:#000 }" rule further down,
+   which was winning the cascade and turning this logo black. */
+.mobile-menu__top .brand--menu { --lg: .82; color: #fff; }
 .mobile-menu__close {
   position: relative; flex: none; width: 38px; height: 38px; border-radius: 50%;
   transition: background-color .3s var(--ease), transform .35s var(--ease);
@@ -205,7 +213,7 @@ body.menu-open { overflow: hidden; }
 .mobile-menu__close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .mobile-menu__close:hover { background: rgba(255,255,255,.08); transform: rotate(90deg); }
 
-.mobile-menu__links { position: relative; z-index: 1; flex: 1 1 auto; margin-top: 8px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
+.mobile-menu__links { position: relative; z-index: 1; flex: 1 1 auto; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; overflow-y: hidden; }
 .mobile-menu__links a {
   padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.08);
   font-family: var(--poppins); font-weight: 500; font-size: 22px; color: #fff;
@@ -225,7 +233,9 @@ body.menu-open { overflow: hidden; }
   opacity: 0; transform: translateY(14px); transition: opacity .45s var(--ease) .3s, transform .45s var(--ease) .3s;
 }
 .mobile-menu.is-open .mobile-menu__bottom { opacity: 1; transform: none; }
-.mobile-menu__cta { width: 100%; background: var(--red); box-shadow: 0 8px 12px rgba(255,65,108,.25); }
+/* Figma 51:219 "Become a Member" CTA: px-24 py-16, uppercase 14px semibold.
+   This never had a size modifier class, so it had no padding at all. */
+.mobile-menu__cta { width: 100%; padding: 16px 24px; font-size: 14px; background: var(--red); box-shadow: 0 8px 12px rgba(255,65,108,.25); }
 .mobile-menu__cta::after { display: none; }
 .mobile-menu__socials { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .mobile-menu__socials p { font-weight: 600; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: #fff; }
@@ -529,11 +539,12 @@ body.menu-open { overflow: hidden; }
   html { scroll-padding-top: 76px; }
   .container { padding-left: 20px; padding-right: 20px; }
 
-  /* buttons */
-  .btn--lg, .btn--sm { padding: 12px 18px; font-size: 11px; }
+  /* buttons: bumped up from 12/18/11 so the tap target reads clearly and clears ~44px */
+  .btn--lg { padding: 15px 26px; font-size: 13px; }
+  .btn--sm { padding: 13px 22px; font-size: 12px; }
   .round-btn { width: 40px; height: 40px; }
   .h-xl { font-size: 32px; line-height: 1.04; }
-  .eyebrow { font-size: 10px; }
+  .eyebrow { font-size: 12px; }
   .body { font-size: 13px; line-height: 1.55; }
 
   /* nav */
@@ -557,7 +568,7 @@ body.menu-open { overflow: hidden; }
 
   /* why */
   .why { padding: 64px 0; border-color: var(--line-m); }
-  .why__label { font-size: 10px; }
+  .why__label { font-size: 12px; }
   .why__body { margin-top: 24px; gap: 24px; font-size: 22px; line-height: 1.45; }
 
   /* club */
@@ -604,21 +615,27 @@ body.menu-open { overflow: hidden; }
   /* plans */
   .plans { padding: 64px 0; }
   .plans__head { gap: 8px; }
-  .plans .eyebrow { font-size: 10px; }
+  .plans .eyebrow { font-size: 12px; }
   .plans__grid { margin-top: 28px; grid-template-columns: 1fr; gap: 14px; }
+  /* Full desktop card content (image, name+price row, feature list), just
+     sized to fit the mobile column instead of the old stripped-down version. */
   .plan { height: auto; background: #f6f5f2; border: 1px solid var(--line-m); border-radius: 14px; }
-  .plan__inner { position: static; padding: 22px; gap: 12px; align-items: flex-start; }
-  .plan__img, .plan__row, .plan__list { display: none; }
-  .plan__price-m { display: block; order: 1; font-weight: 800; font-size: 28px; line-height: normal; color: #000; }
-  .plan__desc { display: block; order: 2; font-size: 13px; color: var(--text-800); }
-  .plan__inner::before { content: attr(data-name); order: 0; font-weight: 700; font-size: 12px; text-transform: uppercase; color: #000; }
-  .plan__cta { order: 3; width: auto; margin: 0; padding: 12px 18px; font-size: 11px; background: var(--red); }
+  .plan__inner { position: static; padding: 18px; gap: 14px; align-items: stretch; }
+  .plan__img { display: block; width: 100%; height: 160px; border-radius: 8px; }
+  .plan__row { display: flex; }
+  .plan__name { font-size: 14px; }
+  .plan__price b { font-size: 15px; }
+  .plan__price span { font-size: 12px; }
+  .plan__list { display: block; font-size: 13px; line-height: 1.5; }
+  .plan__price-m, .plan__desc { display: none; }
+  .plan__inner::before { content: none; }
+  .plan__cta { order: 4; width: 100%; margin: 0; padding: 13px 22px; font-size: 12px; background: var(--red); }
   .plan__cta::after { display: none; }
 
   /* goal */
   .goal { padding: 64px 0; border: 0; }
   .goal__head { gap: 8px; }
-  .goal .eyebrow--grey { font-size: 10px; color: var(--text-800); }
+  .goal .eyebrow--grey { font-size: 12px; color: var(--text-800); }
   .goal__text { margin-top: 20px; color: var(--text-800); }
   .goal__progress { margin-top: 28px; gap: 28px; }
   .goal__green { height: 116px; border-radius: 40px; filter: none; }
@@ -640,7 +657,7 @@ body.menu-open { overflow: hidden; }
   .reviews__detail { display: none; }
   .reviews__container, .reviews .container { display: flex; flex-direction: column; }
   .reviews__head { align-items: flex-start; text-align: left; order: 1; }
-  .reviews__nav { display: flex; justify-content: flex-start; order: 2; padding-top: 0; }
+  .reviews__nav { display: flex; justify-content: flex-start; order: 2; margin-top: 24px; padding-top: 0; }
   .reviews__viewport { order: 3; }
   .reviews__viewport { padding: 20px 0 0; }
   .review { flex: 0 0 100%; min-width: 0; background: #181818; border: 0; border-radius: 14px; padding: 22px; gap: 12px; align-items: flex-start; text-align: left; }
@@ -655,7 +672,7 @@ body.menu-open { overflow: hidden; }
   .faq__inner { gap: 32px; }
   .faq__intro { gap: 20px; }
   .faq__heading { gap: 12px; }
-  .faq__eyebrow { font-size: 10px; }
+  .faq__eyebrow { font-size: 12px; }
   .faq__title { font-weight: 700; font-size: 36px; line-height: .98; letter-spacing: -1.08px; }
   .help { height: auto; flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
   .help p { font-size: 13px; white-space: normal; }
