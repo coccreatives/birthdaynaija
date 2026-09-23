@@ -77,15 +77,17 @@
 
   /* ---------- Pricing render (matches the Figma pricing-card spec) ---------- */
   var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
+  var SVG_CHECK = '<svg class="plan__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M11.5 3.75 5.4 10.1 2.5 7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var SVG_X = '<svg class="plan__glyph" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M10.5 3.5 3.5 10.5M3.5 3.5 10.5 10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   window.BN_renderPlanCard = function (p, opts) {
     opts = opts || {};
     var popular = !!p.popular;
     var include = (p.include || []).map(function (f) {
-      return '<div class="plan__row-item"><span class="plan__ind plan__ind--in">✓</span><p>' + esc(f) + '</p></div>';
+      return '<div class="plan__row-item"><span class="plan__ind plan__ind--in">' + SVG_CHECK + '</span><p>' + esc(f) + '</p></div>';
     }).join('');
     var excludeBody = (p.exclude && p.exclude.length)
       ? (p.exclude.map(function (f) {
-          return '<div class="plan__row-item"><span class="plan__ind plan__ind--out">✕</span><p class="is-muted">' + esc(f) + '</p></div>';
+          return '<div class="plan__row-item"><span class="plan__ind plan__ind--out">' + SVG_X + '</span><p class="is-muted">' + esc(f) + '</p></div>';
         }).join(''))
       : (p.excludeNote ? '<p class="plan__excludenote">' + esc(p.excludeNote) + '</p>' : '');
     var ctaAttrs = opts.ctaAttrs || '';
