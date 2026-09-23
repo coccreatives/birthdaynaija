@@ -74,6 +74,7 @@
     celebrate: {
       title: 'Celebrate someone',
       sub: 'Tell us who we are celebrating and we take it from there.',
+      hasPaywall: true,
       steps: [
         {
           title: 'Who are we celebrating?',
@@ -85,11 +86,6 @@
             f.file('photo', 'Photo of the celebrant', { hint: 'JPG or PNG, up to 5 MB. Portrait photos look best.' }),
             f.area('message', 'Birthday message', { placeholder: 'Happy birthday Chioma. Wishing you a year of joy.', maxlength: 300, hint: 'Up to 300 characters.' })
           ]
-        },
-        {
-          title: 'Choose what we do',
-          sub: 'Pick the celebration you want. You can add more later.',
-          fields: [f.opts('package', 'Celebration', ['wall', 'photo', 'video'])]
         },
         {
           title: 'Your details',
@@ -112,6 +108,7 @@
     club: {
       title: 'Join the Club',
       sub: 'One membership, and your birthday is covered every year.',
+      hasPaywall: true,
       steps: [
         {
           title: 'Your details',
@@ -121,14 +118,7 @@
             f.date('birthday', 'Date of birth'),
             f.email('email', 'Email'),
             f.tel('phone', 'Phone number'),
-            f.file('photo', 'Photo for your Wall slot', { hint: 'JPG or PNG, up to 5 MB. You can send this later.' })
-          ]
-        },
-        {
-          title: 'Your membership',
-          sub: 'Membership renews every year. You can cancel any time before renewal.',
-          fields: [
-            f.opts('package', 'Membership', ['club']),
+            f.file('photo', 'Photo for your Wall slot', { hint: 'JPG or PNG, up to 5 MB. You can send this later.' }),
             f.check('consent', 'I have permission to use the photo and details I am submitting, and I agree to the BirthdayNaija content guidelines.')
           ]
         },
@@ -143,6 +133,7 @@
     group: {
       title: 'Get a group plan',
       sub: 'Cover a family, a school or a whole team for the year.',
+      hasPaywall: true,
       steps: [
         {
           title: 'About the group',
@@ -161,7 +152,6 @@
             f.text('contact', 'Contact name'),
             f.email('email', 'Email'),
             f.tel('phone', 'Phone number'),
-            f.opts('package', 'Plan', ['group']),
             f.check('consent', 'I am authorised to share these details on behalf of the group.')
           ]
         },
@@ -277,10 +267,65 @@
     window.scrollTo(0, savedScrollY);
   }
 
+  /* The paywall step: same 3 tiers as the Plans section on the page,
+     pulled from the same config (window.BN_CONFIG.pricing) so the copy
+     only has to be edited in one place. */
+  var TIERS = [
+    { key: 'oneoff', flow: 'celebrate', package: 'wall' },
+    { key: 'club', flow: 'club', package: 'club' },
+    { key: 'group', flow: 'group', package: 'group' }
+  ];
+  var DEFAULT_PACKAGE = { celebrate: 'wall', club: 'club', group: 'group' };
+
+  function tierData(key) {
+    return (window.BN_CONFIG && window.BN_CONFIG.pricing && window.BN_CONFIG.pricing[key]) || {};
+  }
+
+  function paywallBlock() {
+    var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
+    var wrap = document.createElement('div');
+    wrap.className = 'paywall';
+    wrap.innerHTML =
+      '<div class="paywall__grid">' +
+      TIERS.map(function (t) {
+        var p = tierData(t.key);
+        var active = state.data.package === t.package;
+        var include = (p.include || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
+        var excludeBlock = (p.exclude && p.exclude.length)
+          ? '<p class="paywall__label">Not included</p><ul class="paywall__list paywall__list--out">' +
+            p.exclude.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'
+          : (p.excludeNote ? '<p class="paywall__note">' + esc(p.excludeNote) + '</p>' : '');
+        return '<div class="paywall__card' + (active ? ' is-active' : '') + (p.popular ? ' is-popular' : '') + '">' +
+          (p.popular ? '<span class="paywall__badge">Most popular</span>' : '') +
+          '<p class="paywall__num">' + esc(p.name || '') + '</p>' +
+          '<p class="paywall__price"><b>' + NGN(p.amount || 0) + '</b><span>' + esc(p.unit || '') + '</span></p>' +
+          '<p class="paywall__tag">' + esc(p.tagline || p.summary || '') + '</p>' +
+          '<p class="paywall__label">What you get</p>' +
+          '<ul class="paywall__list">' + include + '</ul>' +
+          excludeBlock +
+          '<button type="button" class="btn btn--grad paywall__cta" data-tier-btn="' + t.key + '">' + esc(p.cta || 'Choose') + '</button>' +
+          '</div>';
+      }).join('') +
+      '</div>';
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-tier-btn]');
+      if (!btn) return;
+      var tier = TIERS.filter(function (t) { return t.key === btn.getAttribute('data-tier-btn'); })[0];
+      if (!tier) return;
+      state.key = tier.flow;
+      state.flow = FLOWS[tier.flow];
+      state.step = 0;
+      state.data.package = tier.package;
+      render();
+    });
+    return wrap;
+  }
+
   function open(key, preset) {
     var flow = FLOWS[key];
     if (!flow) return;
     state = { flow: flow, key: key, step: 0, data: Object.assign({}, preset || {}), opener: document.activeElement };
+    if (flow.hasPaywall && !state.data.package) state.data.package = DEFAULT_PACKAGE[key];
     clearTimeout(modalTimer);
     modal.hidden = false;
     lockScroll();
@@ -306,11 +351,30 @@
 
   function render() {
     var flow = state.flow, step = flow.steps[state.step];
+    var onPaywallStep = state.step === 0 && flow.hasPaywall;
     elStep.textContent = 'Step ' + (state.step + 1) + ' of ' + flow.steps.length;
-    elTitle.textContent = step.title;
-    elSub.textContent = step.sub || flow.sub;
+    if (onPaywallStep) {
+      elTitle.textContent = 'Choose Your Membership';
+      elSub.textContent = 'Get access to experiences, exclusive benefits, and meaningful connections. Choose the plan that fits you best.';
+    } else {
+      elTitle.textContent = step.title;
+      elSub.textContent = step.sub || flow.sub;
+    }
     elBar.style.width = Math.round(((state.step + 1) / flow.steps.length) * 100) + '%';
     elBody.innerHTML = '';
+    if (onPaywallStep) {
+      elBody.appendChild(paywallBlock());
+      var formHeading = document.createElement('p');
+      formHeading.className = 'paywall__form-title';
+      formHeading.textContent = step.title;
+      elBody.appendChild(formHeading);
+      if (step.sub) {
+        var formSub = document.createElement('p');
+        formSub.className = 'paywall__form-sub';
+        formSub.textContent = step.sub;
+        elBody.appendChild(formSub);
+      }
+    }
     if (step.summary) elBody.appendChild(summaryBlock());
     (step.fields || []).forEach(function (field) { elBody.appendChild(build(field)); });
     btnBack.hidden = false;

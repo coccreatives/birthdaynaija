@@ -11,24 +11,36 @@
      --------------------------------------------------------- */
   var BN_CONFIG = window.BN_CONFIG || {
     currency: '₦',
+    /* Same 3 tiers used by the "Plans" section on the page and by the
+       paywall step inside the forms (assets/js/forms.js). Keep both in
+       sync by hand when this copy changes; there's no build step to
+       share it automatically. */
     pricing: {
       oneoff: {
-        name: 'One Off', amount: 500, prefix: 'From ', unit: '/one off', unitShort: '',
-        features: ['Birthday Wall entry', 'Photo or video shoutout', 'Premium branded designs available'],
-        summary: 'A single Wall entry or shoutout',
+        name: '1. One Off', amount: 500, prefix: '', unit: '/ one time', unitShort: '',
+        tagline: 'Perfect for trying it out.',
+        include: ['Birthday Wall entry', 'Shoutout', 'Choose your own challenge'],
+        exclude: ['Wall slot', 'Priority booking', 'Automatic yearly renewal', 'Family and sibling coverage'],
+        summary: 'Perfect for trying it out.',
         cta: 'Book once'
       },
       club: {
-        name: 'Club Member', amount: 15000, prefix: '', unit: '/year', unitShort: '/yr',
-        features: ['Guaranteed Wall slot', 'Birthday shoutout on our channels', 'Priority booking for Friday Live', 'Renews automatically every year'],
-        summary: 'Wall entry + shoutout, every year',
-        cta: 'Join the Club'
+        name: '2. Club Member', amount: 15000, prefix: '', unit: '/ year', unitShort: '/yr',
+        tagline: 'For members who want more access and exclusive benefits.',
+        include: ['Everything in One Off', 'Dedicated wall slot', 'Shoutout', 'Priority booking', 'Automatic renewal every year'],
+        exclude: ['Family and sibling coverage', 'Whole house membership'],
+        summary: 'For members who want more access and exclusive benefits.',
+        cta: 'Join the Club',
+        popular: true
       },
       group: {
-        name: 'Family & Business', amount: 45000, prefix: '', unit: '/year', unitShort: '/yr',
-        features: ['Cover the whole family or team', 'Employee and customer birthday packages', 'Sponsored shoutouts and Wall sections'],
-        summary: 'Families, schools and companies',
-        cta: 'Get a group plan'
+        name: '3. Family / Group', amount: 45000, prefix: '', unit: '/ year', unitShort: '/yr',
+        tagline: 'For families who want to enjoy the benefits together.',
+        include: ['Everything in Club Member', 'Cover parents', 'Cover siblings', 'Cover the whole house', 'Priority booking', 'Dedicated wall slot', 'Automatic yearly renewal'],
+        exclude: [],
+        excludeNote: 'No major benefits excluded.',
+        summary: 'For families who want to enjoy the benefits together.',
+        cta: 'Add my family'
       }
     },
     /* How many Wall entries show before "See more". Raise it, or let the
@@ -41,6 +53,10 @@
       { badge: 'GIFTS AND EXPERIENCES', text: 'Send a gift box or a special birthday experience, and we make sure it lands on the day.', cta: 'Send a gift', href: '#plans', form: 'gift' }
     ]
   };
+
+  // Exposed so assets/js/forms.js can build the paywall step from the
+  // exact same pricing copy instead of a second, driftable copy.
+  window.BN_CONFIG = BN_CONFIG;
 
   var fmt = function (n) { return BN_CONFIG.currency + Number(n).toLocaleString('en-NG'); };
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -68,10 +84,26 @@
     set('price', p.prefix + fmt(p.amount));
     set('unit', p.unit);
     set('priceShort', p.prefix + fmt(p.amount) + p.unitShort);
-    set('summary', p.summary);
+    set('summary', p.tagline || p.summary);
     set('cta', p.cta);
+    var esc = function (s) { return String(s).replace(/</g, '&lt;'); };
     var list = $('[data-f="features"]', card);
-    if (list) list.innerHTML = p.features.map(function (f) { return '<li>' + f.replace(/</g, '&lt;') + '</li>'; }).join('');
+    if (list) list.innerHTML = (p.include || []).map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('');
+    var outWrap = $('[data-f="exclude-wrap"]', card);
+    var outList = $('[data-f="exclude"]', card);
+    if (outList) {
+      if (p.exclude && p.exclude.length) {
+        outList.hidden = false;
+        outList.innerHTML = p.exclude.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('');
+        if (outWrap) outWrap.hidden = false;
+      } else {
+        outList.hidden = true;
+        if (outWrap) outWrap.hidden = true;
+      }
+    }
+    var note = $('[data-f="exclude-note"]', card);
+    if (note) { note.hidden = !p.excludeNote; if (p.excludeNote) note.textContent = p.excludeNote; }
+    card.classList.toggle('plan--popular', !!p.popular);
     $('.plan__inner', card).setAttribute('data-name', p.name);
   });
   $$('[data-price="oneoff.amount"]').forEach(function (el) { el.textContent = fmt(BN_CONFIG.pricing.oneoff.amount); });

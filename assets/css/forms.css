@@ -90,6 +90,35 @@
 .summary__total b { font-weight: 700; font-size: 16px; }
 .note { font-size: 12px; line-height: 1.55; color: var(--text-800); }
 
+/* ---------- paywall: plan chooser at the top of the first form step ---------- */
+.paywall__grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 6px; }
+.paywall__card {
+  position: relative; border: 1px solid var(--line-m); border-radius: 14px; background: #f6f5f2;
+  padding: 18px; display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.paywall__card.is-active { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink) inset; background: #fff; }
+.paywall__card.is-popular { border-color: #e7c9cf; }
+.paywall__badge {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--ink); color: #fff; font-weight: 700; font-size: 10px; letter-spacing: .03em;
+  text-transform: uppercase; padding: 5px 12px; border-radius: 99px;
+}
+.paywall__num { font-weight: 700; font-size: 15px; color: var(--ink); }
+.paywall__price { display: flex; align-items: baseline; gap: 4px; }
+.paywall__price b { font-weight: 700; font-size: 20px; color: var(--ink); }
+.paywall__price span { font-size: 13px; color: var(--text-800); }
+.paywall__tag { font-size: 13px; color: var(--text-800); margin-top: -4px; }
+.paywall__label { margin-top: 2px; font-weight: 700; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-800); }
+.paywall__list { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.6; color: var(--grey-700); }
+.paywall__list li::before { content: "\2713  "; color: var(--g2); font-weight: 700; }
+.paywall__list--out { color: var(--text-800); }
+.paywall__list--out li::before { content: "\2715  "; color: #bbb; font-weight: 700; }
+.paywall__note { font-size: 12px; color: var(--text-800); }
+.paywall__cta { width: 100%; margin-top: 4px; padding: 13px 22px; font-size: 13px; }
+.paywall__form-title { margin-top: 8px; padding-top: 18px; border-top: 1px solid var(--line); font-weight: 700; font-size: 16px; color: var(--ink); }
+.paywall__form-sub { margin-top: 4px; font-size: 13px; color: var(--text-800); }
+
 /* ---------- success ---------- */
 .done { padding: 44px 28px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .done__mark { width: 48px; height: 48px; flex: none; }

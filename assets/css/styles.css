@@ -371,23 +371,37 @@ body.menu-open { overflow: hidden; }
 .plans__title { max-width: 766px; }
 .plans__grid { margin-top: 80px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .plan {
-  position: relative; height: 525px; border-radius: 8px; overflow: hidden;
+  position: relative; border-radius: 8px; overflow: hidden;
   background-color: #f5f5f5;
   background-image: linear-gradient(to bottom, #dfe4ed 1px, transparent 1px), linear-gradient(to right, #dfe4ed 1px, transparent 1px);
   background-size: 35px 35px;
   transition: opacity .9s var(--ease);
+  display: flex; flex-direction: column;
 }
-.plan__inner { position: absolute; left: 32px; right: 32px; top: 33px; bottom: 32px; display: flex; flex-direction: column; gap: 20px; }
-.plan__img { width: 100%; height: 220px; flex: none; object-fit: cover; border-radius: 8px; }
+/* Auto height, not a fixed 525px card: the what-you-get / not-included
+   lists make every card a different length. */
+.plan__inner { position: static; padding: 32px; display: flex; flex-direction: column; gap: 12px; }
+.plan__img { width: 100%; height: 200px; flex: none; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
 .plan__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; line-height: normal; white-space: nowrap; }
 .plan__name { font-weight: 600; font-size: 16px; text-transform: uppercase; color: var(--ink); }
 .plan__price { display: flex; align-items: baseline; gap: 4px; }
 .plan__price b { font-weight: 600; font-size: 16px; color: var(--ink); }
 .plan__price span { font-size: 14px; color: var(--text-800); }
-.plan__list { list-style: none; padding: 0; font-size: 15px; line-height: 1.5; color: var(--grey-700); }
-.plan__list li::before { content: "• "; }
-.plan__price-m, .plan__desc { display: none; }
-.plan__cta { --ang: 8.17deg; width: 100%; margin-top: auto; margin-bottom: 8px; padding: 14px 24px; font-size: 14px; }
+.plan__desc { font-size: 13px; line-height: 1.5; color: var(--text-800); }
+.plan__label { margin-top: 4px; font-weight: 700; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--text-800); }
+.plan__list { list-style: none; padding: 0; font-size: 14px; line-height: 1.6; color: var(--grey-700); }
+.plan__list li::before { content: "\2713  "; color: var(--g2); font-weight: 700; }
+.plan__list--out { color: var(--text-800); }
+.plan__list--out li::before { content: "\2715  "; color: #bbb; font-weight: 700; }
+.plan__note { font-size: 12px; color: var(--text-800); }
+.plan__popular {
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  background: var(--ink); color: #fff; font-weight: 700; font-size: 11px;
+  letter-spacing: .03em; text-transform: uppercase; padding: 6px 14px; border-radius: 99px;
+}
+.plan--popular { box-shadow: 0 0 0 2px var(--ink) inset; }
+.plan__price-m { display: none; }
+.plan__cta { --ang: 8.17deg; width: 100%; margin-top: 8px; padding: 14px 24px; font-size: 14px; }
 
 /* =========================================================
    GOAL
@@ -623,8 +637,11 @@ body.menu-open { overflow: hidden; }
   .plan__price b { font-size: 15px; }
   .plan__price span { font-size: 12px; }
   .plan__list { display: block; font-size: 13px; line-height: 1.5; }
-  .plan__price-m, .plan__desc { display: none; }
+  .plan__desc { font-size: 12px; }
+  .plan__label { font-size: 10px; }
+  .plan__price-m { display: none; }
   .plan__inner::before { content: none; }
+  .plan__popular { top: 12px; right: 12px; font-size: 10px; padding: 5px 12px; }
   .plan__cta { order: 4; width: 100%; margin: 0; padding: 15px 26px; font-size: 14px; }
 
   /* goal */
