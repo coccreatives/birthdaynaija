@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BirthdayNaija | Every birthday matters</title>
+<meta name="description" content="BirthdayNaija is Nigeria's home for birthdays. Send a shoutout, put a name on the Birthday Wall, send a gift, or join the Club and get celebrated every year.">
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/forms.css">
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<header class="nav" id="top">
+  <div class="nav__inner">
+    <a class="brand" href="#top" aria-label="BirthdayNaijatv home">
+      <span class="brand__mark" aria-hidden="true"><b>BN</b><i>tv</i></span>
+      <span class="brand__word">BirthdayNaijatv</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#wall">Birthday Wall</a>
+      <a href="#ways" data-go-slide="0">Shoutout</a>
+      <a href="#ways" data-go-slide="2">Gift</a>
+      <a href="#plans">Nation 365</a>
+      <a href="#friday-live">Friday Live</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--grad btn--nav" href="#plans" data-form="celebrate">Celebrate someone</a>
+    </div>
+    <button class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav__burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <span class="mobile-menu__glow mobile-menu__glow--pink" aria-hidden="true"></span>
+    <span class="mobile-menu__glow mobile-menu__glow--gold" aria-hidden="true"></span>
+    <div class="mobile-menu__top">
+      <a class="brand brand--menu" href="#top" aria-label="BirthdayNaijatv home">
+        <span class="brand__mark" aria-hidden="true"><b>BN</b><i>tv</i></span>
+        <span class="brand__word">BirthdayNaijatv</span>
+      </a>
+      <button class="mobile-menu__close" type="button" data-menu-close aria-label="Close menu"></button>
+    </div>
+    <nav class="mobile-menu__links" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#wall">Birthday Wall</a>
+      <a href="#ways" data-go-slide="0">Shoutout</a>
+      <a href="#ways" data-go-slide="2">Gift</a>
+      <a href="#plans">Nation 365</a>
+      <a href="#friday-live">Friday Live</a>
+    </nav>
+    <div class="mobile-menu__bottom">
+      <a class="btn btn--grad mobile-menu__cta" href="#plans" data-form="celebrate">Celebrate someone</a>
+      <div class="mobile-menu__socials">
+        <p>Connect with the club</p>
+        <div class="mobile-menu__social-row">
+          <a href="#instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" width="18" height="18"></a>
+          <a href="#x" aria-label="X"><img src="assets/icons/circle-x.svg" alt="" width="18" height="18"></a>
+          <a href="#youtube" aria-label="YouTube"><img src="assets/icons/youtube.svg" alt="" width="22" height="22"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__inner container">
+    <div class="hero__left">
+      <h1 class="hero__title reveal">Every birthday deserves to be celebrated.</h1>
+      <p class="hero__text reveal">BirthdayNaija is Nigeria's home for birthdays. Send a shoutout, put a name on the Birthday Wall, send a gift, or join the Club and get celebrated every year, whether anyone else remembers or not.</p>
+      <div class="hero__actions reveal">
+        <a class="btn btn--lg btn--grad btn--hero-primary" href="#plans" data-form="celebrate"><span>Celebrate someone, from <span data-price="oneoff.amount">₦500</span></span></a>
+        <a class="btn btn--lg btn--grey" href="#wall">See today's birthdays</a>
+      </div>
+    </div>
+    <div class="hero__media reveal">
+      <img src="assets/img/hero-right.webp" alt="Friends raising a glass at a birthday celebration" width="1040" height="693" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY WE EXIST ============ -->
+<section class="why" id="why">
+  <div class="container">
+    <p class="eyebrow eyebrow--dark why__label reveal">Why we exist</p>
+    <div class="why__body">
+      <p class="why__muted reveal">For a lot of people in Nigeria, birthdays pass quietly. No calls. No cake. Nobody to say the words. If your family isn't close by, or there's no money to celebrate, the day comes and goes like any other.</p>
+      <p class="why__strong reveal">BirthdayNaija exists so that doesn't happen, because every birthday and every life matters. We put your name on our Birthday Wall, send you a birthday shoutout, and make sure someone celebrates you, every single year.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBERSHIP ============ -->
+<section class="club" id="club">
+  <div class="container">
+    <div class="club__head">
+      <div class="club__copy">
+        <h2 class="club__title reveal">One membership. Every birthday covered.</h2>
+        <p class="club__text reveal">The BirthdayNaija Club is one recurring plan. Members skip the picking and choosing: your Wall slot, your shoutout and first access to our shows arrive automatically on your day, every year.</p>
+      </div>
+      <a class="btn btn--grad btn--sm club__cta reveal" href="#plans">See club pricing</a>
+    </div>
+    <div class="club__grid">
+      <article class="benefit reveal">
+        <img class="benefit__img" src="assets/img/feature-wall.webp" alt="" width="200" height="200" loading="lazy">
+        <div class="benefit__copy">
+          <h3>Your Name Goes Up</h3>
+          <p>A guaranteed slot on the Birthday Wall, every year, no application.</p>
+        </div>
+      </article>
+      <article class="benefit reveal">
+        <img class="benefit__img" src="assets/img/feature-video.webp" alt="" width="200" height="200" loading="lazy">
+        <div class="benefit__copy">
+          <h3>A Shoutout, Filmed.</h3>
+          <p>Your birthday featured in a video on our website and social channels, not just a comment.</p>
+        </div>
+      </article>
+      <article class="benefit reveal">
+        <img class="benefit__img" src="assets/img/feature-video.webp" alt="" width="200" height="200" loading="lazy">
+        <div class="benefit__copy">
+          <h3>First Access</h3>
+          <p>Club members get priority booking on Friday Live appearances and Nation 365 features.</p>
+        </div>
+      </article>
+    </div>
+    <a class="btn btn--grad btn--sm club__cta-m" href="#plans">See club pricing</a>
+  </div>
+</section>
+
+<!-- ============ BIRTHDAY WALL ============ -->
+<section class="wall" id="wall">
+  <div class="container">
+    <div class="wall__head">
+      <p class="eyebrow reveal">The Birthday Wall</p>
+      <h2 class="h-xl wall__title reveal">See who Nigeria is celebrating today.</h2>
+      <p class="body wall__text reveal">The Birthday Wall is where every birthday we celebrate lives: a daily, public record of the people Nigeria is celebrating. Browse today's celebrants, find someone by name or date, or add a name yourself. Entries start at <span data-price="oneoff.amount">₦500</span> and every entry is reviewed before it goes live. Club members get theirs automatically.</p>
+    </div>
+    <div class="wall__grid" id="wall-grid">
+      <!-- Wall entries: wire to the approved celebrants feed. data-offset = days from today -->
+      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-1.webp" alt="Tunde Oye" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Tunde Oye</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-2.webp" alt="Chioma Nze" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Chioma Nze</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-3.webp" alt="Abubakar S." width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Abubakar S.</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-4.webp" alt="Funmi Alao" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Funmi Alao</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard reveal" data-offset="1"><img src="assets/img/wall-5.webp" alt="Emeka Okoro" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Emeka Okoro</p><span class="tag"><span class="tag__date">Tomorrow</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard reveal" data-offset="1"><img src="assets/img/wall-6.webp" alt="Kemi Balogun" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Kemi Balogun</p><span class="tag"><span class="tag__date">Tomorrow</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard wcard--d reveal" data-offset="2"><img src="assets/img/wall-7.webp" alt="Yusuf D." width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Yusuf D.</p><span class="tag"><span class="tag__date">Soon</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+      <article class="wcard wcard--d reveal" data-offset="3"><img src="assets/img/wall-8.webp" alt="Ngozi Obi" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Ngozi Obi</p><span class="tag"><span class="tag__date">Soon</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
+    </div>
+    <!-- Shown only when there are more entries than fit. Hidden entirely otherwise. -->
+    <div class="wall__more" data-wall-more hidden>
+      <button type="button" class="btn btn--lg btn--grey" data-wall-toggle aria-expanded="false" aria-controls="wall-grid">See more</button>
+    </div>
+    <div class="center reveal">
+      <a class="btn btn--lg btn--grad" href="#plans" data-form="celebrate" data-package="wall">Add a name to the wall</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MORE WAYS TO CELEBRATE ============ -->
+<section class="ways" id="ways">
+  <div class="container">
+    <p class="eyebrow reveal">Shoutouts, gifts and business</p>
+    <h2 class="h-xl ways__title reveal">Celebrate anyone, your way</h2>
+
+    <div class="panel panel--dark reveal" data-slider>
+      <div class="panel__phone">
+        <div class="phone-scale">
+          <video class="panel__video" src="assets/video/more-ways-to-celebrate.mp4" poster="assets/img/poster-more-ways.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+        </div>
+      </div>
+
+      <div class="panel__story">
+        <div class="panel__top">
+          <div class="panel__meta">
+            <span class="badge"><span class="badge__star">✦</span><span class="badge__text" data-slide-badge>BIRTHDAY WISHES</span></span>
+            <span class="panel__num" data-slide-num>01</span>
+          </div>
+          <div class="panel__body">
+            <p class="panel__text" data-slide-text>We celebrate you with a custom video shoutout, your name, your moment, made just for you.</p>
+            <a class="btn btn--lg btn--grad panel__cta" href="#plans" data-slide-cta>Book a shoutout</a>
+          </div>
+        </div>
+        <div class="pager pager--dark">
+          <div class="pager__controls">
+            <button class="round-btn round-btn--dark" data-prev aria-label="Previous"><img class="ic ic--on-dark" src="assets/icons/arrow-left.svg" alt="" width="20" height="20"><img class="ic ic--on-light" src="assets/icons/arrow-left-ink.svg" alt="" width="20" height="20"></button>
+            <button class="round-btn round-btn--light" data-next aria-label="Next"><img class="ic ic--on-light" src="assets/icons/arrow-right.svg" alt="" width="20" height="20"><img class="ic ic--on-dark" src="assets/icons/arrow-right-w.svg" alt="" width="20" height="20"></button>
+            <span class="pager__count" data-count>01 / 03</span>
+          </div>
+          <div class="pager__dots" data-dots></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile pager sits below the panel (Figma mobile: Story footer) -->
+    <div class="pager pager--light pager--m" data-slider-remote>
+      <div class="pager__controls">
+        <button class="round-btn round-btn--dark" data-prev aria-label="Previous"><img class="ic ic--on-dark" src="assets/icons/arrow-left.svg" alt="" width="20" height="20"><img class="ic ic--on-light" src="assets/icons/arrow-left-ink.svg" alt="" width="20" height="20"></button>
+        <button class="round-btn round-btn--light" data-next aria-label="Next"><img class="ic ic--on-light" src="assets/icons/arrow-right.svg" alt="" width="20" height="20"><img class="ic ic--on-dark" src="assets/icons/arrow-right-w.svg" alt="" width="20" height="20"></button>
+        <span class="pager__count" data-count>01 / 03</span>
+      </div>
+      <div class="pager__dots" data-dots></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRIDAY LIVE ============ -->
+<section class="live" id="friday-live">
+  <div class="container">
+    <p class="eyebrow eyebrow--light reveal">Friday Live</p>
+    <h2 class="h-xl live__title reveal">One show. Every Friday. Real people.</h2>
+    <div class="panel panel--light reveal">
+      <div class="panel__phone">
+        <div class="phone-scale">
+          <video class="panel__video" src="assets/video/one-show-every-friday.mp4" poster="assets/img/poster-friday-live.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+        </div>
+      </div>
+      <div class="panel__story panel__story--center">
+        <div class="panel__body">
+          <p class="panel__text panel__text--dark">Street surprises, comedy, and birthdays called out live. If it's your week, you might be the surprise.</p>
+          <a class="btn btn--lg btn--grad panel__cta" href="#watch">Watch Friday Live</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<!-- Prices are rendered from BN_CONFIG.pricing in assets/js/main.js, so they can be fed from the admin dashboard -->
+<section class="plans" id="plans">
+  <div class="container">
+    <div class="plans__head">
+      <p class="eyebrow reveal">Plans and pricing</p>
+      <h2 class="h-xl plans__title reveal">Pick a plan. Or pick one moment.</h2>
+    </div>
+    <div class="plans__grid">
+      <article class="plan reveal" data-plan="oneoff">
+        <div class="plan__inner">
+          <img class="plan__img" src="assets/img/package-oneoff.webp" alt="" width="700" height="467" loading="lazy">
+          <div class="plan__row"><p class="plan__name" data-f="name">One Off</p><p class="plan__price"><b data-f="price">From ₦500</b><span data-f="unit">/one off</span></p></div>
+          <p class="plan__price-m" data-f="priceShort">From ₦500</p>
+          <ul class="plan__list" data-f="features"></ul>
+          <p class="plan__desc" data-f="summary"></p>
+          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="celebrate">Book once</a>
+        </div>
+      </article>
+      <article class="plan reveal" data-plan="club">
+        <div class="plan__inner">
+          <img class="plan__img" src="assets/img/package-club.webp" alt="" width="700" height="467" loading="lazy">
+          <div class="plan__row"><p class="plan__name" data-f="name">Club Member</p><p class="plan__price"><b data-f="price">₦15,000</b><span data-f="unit">/year</span></p></div>
+          <p class="plan__price-m" data-f="priceShort">₦15,000/yr</p>
+          <ul class="plan__list" data-f="features"></ul>
+          <p class="plan__desc" data-f="summary"></p>
+          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="club" data-package="club">Join the Club</a>
+        </div>
+      </article>
+      <article class="plan reveal" data-plan="group">
+        <div class="plan__inner">
+          <img class="plan__img" src="assets/img/package-family.webp" alt="" width="700" height="467" loading="lazy">
+          <div class="plan__row"><p class="plan__name" data-f="name">Family &amp; Business</p><p class="plan__price"><b data-f="price">₦45,000</b><span data-f="unit">/year</span></p></div>
+          <p class="plan__price-m" data-f="priceShort">₦45,000/yr</p>
+          <ul class="plan__list" data-f="features"></ul>
+          <p class="plan__desc" data-f="summary"></p>
+          <a class="btn btn--grad plan__cta" href="#checkout" data-f="cta" data-form="group" data-package="group">Get a group plan</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GOAL ============ -->
+<section class="goal" id="goal">
+  <div class="container">
+    <div class="goal__head">
+      <p class="eyebrow eyebrow--grey reveal">The target</p>
+      <h2 class="h-xl goal__title reveal">Our goal is 1,000,000 birthdays</h2>
+      <p class="body goal__text reveal">This isn't a campaign that ends. It's the actual goal. Every membership, every Wall entry, every shoutout and every gift is one more birthday that got marked instead of missed.</p>
+    </div>
+    <div class="goal__progress reveal">
+      <div class="goal__green"><img src="assets/img/putting-green.webp" alt="" width="1536" height="672" loading="lazy"></div>
+      <div class="goal__stats">
+        <div><p class="goal__label">Birthdays celebrated so far</p><p class="goal__num"><span data-countup="247580">247,580</span><span class="goal__suffix"> celebrated</span></p></div>
+        <div class="goal__target"><p class="goal__label">Target</p><p class="goal__num">1,000,000</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<!-- PLACEHOLDER reviews and rating from the Figma file. Replace with real member reviews before launch. -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews__head">
+      <div>
+        <p class="reviews__rating-m">4.8 ★★★★★</p>
+        <h2 class="reviews__title reveal">Celebrated by many</h2>
+        <p class="reviews__detail reveal"><b>4.8/5</b><span class="stars">★★★★★</span><span class="reviews__count">based on 56 reviews</span></p>
+      </div>
+    </div>
+    <div class="reviews__viewport">
+      <div class="reviews__track" data-rev-track>
+      <article class="review reveal">
+        <p class="review__name">Amina Lawal</p>
+        <p class="stars review__stars">★★★★★</p>
+        <p class="review__text">BirthdayNaija made my day feel seen. The shoutout was warm, funny and completely personal.</p>
+      </article>
+      <article class="review reveal">
+        <p class="review__name">Ifeanyi Obi</p>
+        <p class="stars review__stars">★★★★★</p>
+        <p class="review__text">My sister surprised me with a Wall entry. I still go back to the video.</p>
+      </article>
+      <article class="review reveal">
+        <p class="review__name">Queen Joseph</p>
+        <p class="stars review__stars">★★★★★</p>
+        <p class="review__text">A simple idea, beautifully done. Everyone deserves this feeling.</p>
+      </article>
+      </div>
+    </div>
+      <div class="reviews__nav">
+        <button class="round-btn round-btn--dark" data-rev-prev aria-label="Previous review"><img class="ic ic--on-dark" src="assets/icons/r-arrow-left.svg" alt="" width="20" height="20"><img class="ic ic--on-light" src="assets/icons/r-arrow-left-ink.svg" alt="" width="20" height="20"></button>
+        <button class="round-btn round-btn--light" data-rev-next aria-label="Next review"><img class="ic ic--on-light" src="assets/icons/r-arrow-right.svg" alt="" width="20" height="20"><img class="ic ic--on-dark" src="assets/icons/r-arrow-right-w.svg" alt="" width="20" height="20"></button>
+      </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="container faq__inner">
+    <div class="faq__intro">
+      <div class="faq__heading">
+        <p class="faq__eyebrow">FAQ</p>
+        <h2 class="faq__title reveal">Frequently asked questions</h2>
+      </div>
+      <div class="help reveal">
+        <p>Have a question? Let's discuss it now!</p>
+        <a class="help__btn" href="#contact">Browse Help Center</a>
+      </div>
+    </div>
+    <div class="faq__list">
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>What is BirthdayNaija?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>A digital home for birthday celebration and recognition. Individuals, families, friends, schools and companies use it to celebrate people with shoutouts, personalised messages, videos, gifts and a public spot on the Birthday Wall.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>How do I send a birthday shoutout?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>Choose a shoutout, add the celebrant's name, photo or video and your message, then pay. Our team reviews it, improves the design where needed and publishes it on the Wall and our social channels.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>Who approves what appears on the Birthday Wall?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>Every public submission is reviewed by the BirthdayNaija content team before it goes live. Nothing is published to the website without moderation.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>Can my business sponsor a shoutout or campaign?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>Yes. Brands can sponsor individual shoutouts, groups of celebrants, Wall sections, giveaways and birthday campaigns, or buy employee and customer birthday packages. Sponsored content clearly features your brand.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>How can I pay?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>Debit and credit cards, bank transfer and secure Nigerian payment gateways. Online payments are confirmed automatically. Shoutouts, gifts and Wall placements are one time payments; Club and corporate packages run on annual memberships.</p></div>
+      </div>
+      <div class="qa reveal">
+        <button class="qa__q" aria-expanded="false"><span>What content is not allowed on BirthdayNaija?</span><img src="assets/icons/plus.svg" alt="" width="12" height="12"></button>
+        <div class="qa__a"><p>Obscene, defamatory, hateful, discriminatory, fraudulent or threatening content. Only upload photos and videos you have permission to use. We may reject, edit or remove anything that breaks these standards or another person's rights.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="final__glow" aria-hidden="true"></div>
+  <div class="final__inner">
+    <p class="final__text reveal" data-words>Someone's birthday is today. Make sure they know.</p>
+    <a class="btn btn--lg btn--grad final__cta reveal" href="#wall" data-form="celebrate">Celebrate someone</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="brand brand--sm" href="#top" aria-label="BirthdayNaijatv home">
+          <span class="brand__mark" aria-hidden="true"><b>BN</b><i>tv</i></span>
+          <span class="brand__word">BirthdayNaijatv</span>
+        </a>
+        <p>Every birthday and every life matters. Remembered every year, for everyone.</p>
+      </div>
+      <div class="footer__dirs">
+        <div class="footer__col">
+          <p class="footer__h">Explore</p>
+          <a href="#wall">Birthday Wall</a><a href="#ways" data-go-slide="0">Shoutouts</a><a href="#ways" data-go-slide="2">Gifts</a><a href="#club">The Club</a><a href="#plans">Nation 365</a><a href="#friday-live">Friday Live</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Company</p>
+          <a href="#about">About</a><a href="#goal">The 1,000,000 Birthday Goal</a><a href="#ways" data-go-slide="1">For Business</a><a href="#contact">Contact</a><a href="#press">Press</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Legal</p>
+          <a href="#terms">Terms</a><a href="#privacy">Privacy</a><a href="#guidelines">Content Guidelines</a><a href="#refunds">Refunds</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> BirthdayNaija. Built in Nigeria, for Nigeria.</p>
+      <div class="footer__social">
+        <a href="#instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" width="19" height="19"></a>
+        <a href="#x" aria-label="X"><img src="assets/icons/circle-x.svg" alt="" width="19" height="19"></a>
+        <a href="#youtube" aria-label="YouTube" data-ico="youtube"><img src="assets/icons/youtube.svg" alt="" width="25" height="25"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FORM MODAL ============ -->
+<div class="modal" id="bn-modal" role="dialog" aria-modal="true" aria-labelledby="bn-modal-title" hidden>
+  <div class="modal__backdrop" data-m-close></div>
+  <div class="modal__card">
+    <button class="modal__close" type="button" aria-label="Close" data-m-close>&times;</button>
+    <div class="modal__head">
+      <p class="modal__eyebrow" data-m-step>Step 1 of 4</p>
+      <h2 class="modal__title" id="bn-modal-title" data-m-title>Celebrate someone</h2>
+      <p class="modal__sub" data-m-sub></p>
+      <div class="modal__bar"><span data-m-bar></span></div>
+    </div>
+    <div class="modal__body" data-m-body></div>
+    <div class="modal__foot" data-m-foot>
+      <button class="btn btn--ghost" type="button" data-m-back hidden>Back</button>
+      <button class="btn btn--grad btn--md" type="button" data-m-next>Continue</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/forms.js" defer></script>
+</body>
+</html>
