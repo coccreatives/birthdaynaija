@@ -17,8 +17,7 @@
        share it automatically. */
     pricing: {
       oneoff: {
-        name: '1. One Off', amount: 500, prefix: '', unit: '/ one time', unitShort: '',
-        img: 'assets/img/package-oneoff.webp',
+        name: 'One Off', amount: 500, prefix: '', unit: '/ one time', unitShort: '',
         tagline: 'Perfect for trying it out.',
         include: ['Birthday Wall entry', 'Shoutout', 'Choose your own challenge'],
         exclude: ['Wall slot', 'Priority booking', 'Automatic yearly renewal', 'Family and sibling coverage'],
@@ -26,8 +25,7 @@
         cta: 'Book once'
       },
       club: {
-        name: '2. Club Member', amount: 15000, prefix: '', unit: '/ year', unitShort: '/yr',
-        img: 'assets/img/package-club.webp',
+        name: 'Club Member', amount: 15000, prefix: '', unit: '/ year', unitShort: '/yr',
         tagline: 'For members who want more access and exclusive benefits.',
         include: ['Everything in One Off', 'Dedicated wall slot', 'Shoutout', 'Priority booking', 'Automatic renewal every year'],
         exclude: ['Family and sibling coverage', 'Whole house membership'],
@@ -36,8 +34,7 @@
         popular: true
       },
       group: {
-        name: '3. Family / Group', amount: 45000, prefix: '', unit: '/ year', unitShort: '/yr',
-        img: 'assets/img/package-family.webp',
+        name: 'Family / Group', amount: 45000, prefix: '', unit: '/ year', unitShort: '/yr',
         tagline: 'For families who want to enjoy the benefits together.',
         include: ['Everything in Club Member', 'Cover parents', 'Cover siblings', 'Cover the whole house', 'Priority booking', 'Dedicated wall slot', 'Automatic yearly renewal'],
         exclude: [],
@@ -84,30 +81,28 @@
     opts = opts || {};
     var popular = !!p.popular;
     var include = (p.include || []).map(function (f) {
-      return '<div class="plan__row-item plan__row-item--in"><span class="plan__ind plan__ind--in">✓</span><p>' + esc(f) + '</p></div>';
+      return '<div class="plan__row-item"><span class="plan__ind plan__ind--in">✓</span><p>' + esc(f) + '</p></div>';
     }).join('');
     var excludeBody = (p.exclude && p.exclude.length)
       ? (p.exclude.map(function (f) {
-          return '<div class="plan__row-item plan__row-item--out"><span class="plan__ind plan__ind--out">✕</span><p class="is-muted">' + esc(f) + '</p></div>';
+          return '<div class="plan__row-item"><span class="plan__ind plan__ind--out">✕</span><p class="is-muted">' + esc(f) + '</p></div>';
         }).join(''))
       : (p.excludeNote ? '<p class="plan__excludenote">' + esc(p.excludeNote) + '</p>' : '');
     var ctaAttrs = opts.ctaAttrs || '';
-    var media = p.img
-      ? '<div class="plan__media"><img class="plan__img" src="' + esc(p.img) + '" alt="" loading="lazy">' +
-        (popular ? '<span class="plan__popular">Most Popular</span>' : '') +
-        '</div>'
-      : '';
     return (
-      media +
-      '<div class="plan__body">' +
-      '<div class="plan__row"><span class="plan__name">' + esc(p.name) + '</span></div>' +
+      '<div class="plan__inner">' +
+      '<div class="plan__head">' +
+      '<div class="plan__badgerow"><span class="plan__badge' + (popular ? ' plan__badge--dark' : '') + '">' + esc(p.name) + '</span></div>' +
       '<div class="plan__price"><b>' + fmt(p.amount) + '</b><span>' + esc(p.unit) + '</span></div>' +
       '<p class="plan__tag">' + esc(p.tagline || p.summary || '') + '</p>' +
+      '</div>' +
       '<hr class="plan__hr">' +
+      '<div class="plan__features">' +
       '<div class="plan__section"><p class="plan__label">What you get</p><div class="plan__rows">' + include + '</div></div>' +
       '<div class="plan__section"><p class="plan__label">Not included</p><div class="plan__rows">' + excludeBody + '</div></div>' +
-      '<div class="plan__ctawrap"><' + (opts.ctaTag || 'a') + ' class="plan__cta' + (popular ? ' plan__cta--grad' : ' plan__cta--dark') + '"' + ctaAttrs + '>' + esc(p.cta) + '</' + (opts.ctaTag || 'a') + '></div>' +
-      '</div>'
+      '</div>' +
+      '</div>' +
+      '<div class="plan__ctawrap"><' + (opts.ctaTag || 'a') + ' class="plan__cta' + (popular ? ' plan__cta--grad' : ' plan__cta--dark') + '"' + ctaAttrs + '>' + esc(p.cta) + '</' + (opts.ctaTag || 'a') + '></div>'
     );
   };
   $$('[data-plan]').forEach(function (card) {
