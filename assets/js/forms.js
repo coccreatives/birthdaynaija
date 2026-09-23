@@ -282,7 +282,8 @@
     elBody.innerHTML = '';
     if (step.summary) elBody.appendChild(summaryBlock());
     (step.fields || []).forEach(function (field) { elBody.appendChild(build(field)); });
-    btnBack.hidden = state.step === 0;
+    btnBack.hidden = false;
+    btnBack.textContent = state.step === 0 ? 'Cancel' : '← Back';
     btnNext.textContent = step.cta || 'Continue';
     elBody.scrollTop = 0;
     var first = $('input, select, textarea', elBody);
@@ -455,7 +456,7 @@
     if (state.step < state.flow.steps.length - 1) { state.step += 1; render(); }
     else finish();
   });
-  btnBack.addEventListener('click', function () { if (state.step > 0) { state.step -= 1; render(); } });
+  btnBack.addEventListener('click', function () { if (state.step > 0) { state.step -= 1; render(); } else { close(); } });
   modal.addEventListener('click', function (e) {
     if (e.target.closest('[data-m-close]') || e.target.classList.contains('modal__backdrop')) close();
   });
