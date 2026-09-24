@@ -177,7 +177,8 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  var SVG_TICK = '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 6 8.5 14 4 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // Same checkmark glyph as the plan/paywall cards (main.js SVG_CHECK)
+  var SVG_TICK = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M11.5 3.75 5.4 10.1 2.5 7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   var wrapEl = $('[data-fp-wrap]');
   var asideEl = $('[data-fp-aside]');

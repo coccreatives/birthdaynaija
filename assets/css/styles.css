@@ -124,24 +124,24 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav.is-scrolled { box-shadow: 0 6px 24px -16px rgba(0,0,0,.25); }
 .nav__inner { max-width: 1440px; margin: 0 auto; padding: 24px var(--pad-x); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 /* Logo: Figma node 2216:381. --lg scales the whole lockup. */
-.brand { --lg: 1; display: inline-flex; align-items: center; gap: calc(5.95px * var(--lg)); color: var(--ink); white-space: nowrap; }
+/* Logo — Figma spec (nodes 17:1072 desktop / 17:1087 mobile / 17:1448 menu).
+   --lg scales the whole lockup; internal proportions match the Figma exactly. */
+.brand { --lg: .82; display: inline-flex; align-items: center; gap: calc(4.337px * var(--lg)); color: var(--ink); white-space: nowrap; }
 .brand__mark {
   position: relative; flex: none;
-  width: calc(44.248px * var(--lg)); height: calc(44.296px * var(--lg));
+  width: calc(44px * var(--lg)); height: calc(44px * var(--lg));
   border-radius: 999px; background: var(--ink);
-  font-family: var(--inter); font-weight: 700; font-style: normal;
-  font-size: calc(15.137px * var(--lg)); line-height: .84; letter-spacing: calc(-1.5137px * var(--lg));
-  color: #fff;
+  font-family: var(--inter); font-style: normal; color: #fff;
 }
-.brand__mark b, .brand__mark i { position: absolute; font-weight: 700; font-style: normal; }
-.brand__mark b { left: calc(8px * var(--lg)); top: calc(11px * var(--lg)); text-transform: uppercase; }
-.brand__mark i { left: calc(22.88px * var(--lg)); top: calc(20.04px * var(--lg)); text-transform: lowercase; }
+.brand__mark b, .brand__mark i { position: absolute; font-weight: 600; font-style: normal; line-height: .84; }
+.brand__mark b { font-size: calc(19.489px * var(--lg)); left: calc(7.45px * var(--lg)); top: calc(8.8px * var(--lg)); letter-spacing: calc(-1.9489px * var(--lg)); text-transform: uppercase; }
+.brand__mark i { font-size: calc(20.534px * var(--lg)); left: calc(17.6px * var(--lg)); top: calc(21.2px * var(--lg)); letter-spacing: calc(-2.0534px * var(--lg)); text-transform: lowercase; }
 .brand__word {
   font-family: var(--inter); font-weight: 700;
-  font-size: calc(22.741px * var(--lg)); line-height: .84; letter-spacing: calc(-1.3644px * var(--lg));
+  font-size: calc(37.709px * var(--lg)); line-height: .84; letter-spacing: calc(-2.2626px * var(--lg));
   color: currentColor;
 }
-.brand--sm { --lg: .82; }
+.brand--sm { --lg: .74; }
 .nav__links { display: flex; gap: 32px; font-weight: 600; font-size: 14px; line-height: 21px; white-space: nowrap; }
 .nav__links a, .nav__signin { position: relative; }
 .nav__links a::after, .nav__signin::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3)); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
@@ -194,13 +194,15 @@ body.menu-open { overflow: hidden; }
 
 .mobile-menu__glow { position: absolute; z-index: 0; border-radius: 999px; filter: blur(60px); pointer-events: none; opacity: 0; transition: opacity .8s var(--ease) .1s; }
 .mobile-menu.is-open .mobile-menu__glow { opacity: .6; }
-.mobile-menu__glow--pink { left: -80px; top: 150px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,65,108,.6), transparent 70%); }
+.mobile-menu__glow--pink { display: none; }
 .mobile-menu__glow--gold { right: -70px; bottom: 140px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,142,83,.55), transparent 70%); }
 
 .mobile-menu__top { position: relative; z-index: 1; flex: none; height: 68px; display: flex; align-items: center; justify-content: space-between; }
 /* Higher specificity than the mobile ".brand { color:#000 }" rule further down,
    which was winning the cascade and turning this logo black. */
-.mobile-menu__top .brand--menu { --lg: .82; color: #fff; }
+.mobile-menu__top .brand--menu { --lg: .74; color: #fff; }
+/* Inverted mark for the dark menu (Figma node 17:1448): white circle, dark glyphs */
+.mobile-menu__top .brand--menu .brand__mark { background: #fff; color: #111; }
 .mobile-menu__close {
   position: relative; flex: none; width: 38px; height: 38px; border-radius: 50%;
   transition: background-color .3s var(--ease), transform .35s var(--ease);
