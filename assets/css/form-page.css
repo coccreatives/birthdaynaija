@@ -15,7 +15,9 @@ body.fp-body { background: #fff; }
   border-bottom: 1px solid var(--line);
 }
 .fp-nav__inner {
-  max-width: 1120px; margin: 0 auto; padding: 16px 24px;
+  /* 1120 content + 2×24 gutter, so the logo's left edge lines up exactly with
+     the page content (.fp padding 24 + .fp__wrap max-width 1120). */
+  max-width: 1168px; margin: 0 auto; padding: 16px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .fp-nav__back {
@@ -34,7 +36,7 @@ body.fp-body { background: #fff; }
 }
 
 /* ---------- aside (plan / context) ---------- */
-.fp__aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 20px; }
+.fp__aside { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 34px; }
 .fp__eyebrow { font-family: var(--poppins); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #111111; }
 .fp__title { font-family: var(--poppins); font-weight: 700; font-size: 72px; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; color: #111111; margin-top: 12px; }
 .fp__lead { margin-top: 12px; font-size: 15px; line-height: 1.6; color: var(--text-800); }
@@ -127,6 +129,6 @@ body.fp-body { background: #fff; }
   .fp__form { padding: 22px 18px; border-radius: 16px; gap: 24px; }
   .fp__group + .fp__group { padding-top: 24px; }
   .fp__title { font-size: 40px; }
-  .fp__aside { gap: 16px; }
+  .fp__aside { gap: 26px; }
   .fp__done { margin: 24px auto; padding: 36px 20px; }
 }
