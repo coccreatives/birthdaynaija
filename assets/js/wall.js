@@ -27,7 +27,7 @@
     { name: "Eniola Bankole", age: 71, img: IMG(4), range: "month", date: "Sep 1", msg: "Seven decades of grace. Long life and good health, Mama.", likes: 22 }
   ];
 
-  var state = { range: "today", q: "", shown: 8, liked: {}, saved: {} };
+  var state = { range: "today", q: "", shown: 8, liked: {}, sort: "recent" };
 
   var grid = $("[data-grid]"), emptyBox = $("[data-empty]"), moreWrap = $("[data-more]");
 
@@ -48,15 +48,19 @@
       }
       if (state.q) { if (p.name.toLowerCase().indexOf(state.q.toLowerCase()) === -1) return false; }
       return true;
+    }).sort(function (a, b) {
+      if (state.sort === "loved") return b.likes - a.likes;
+      if (state.sort === "az") return a.name.localeCompare(b.name);
+      return 0; // recent = source order
     });
   }
 
   function card(p) {
-    var liked = !!state.liked[p._id], saved = !!state.saved[p._id];
-    return '<article class="bcard' + (p.featured ? " bcard--featured" : "") + '" data-open="' + p._id + '">' +
+    var liked = !!state.liked[p._id];
+    var feat = p.featured ? '<span class="bcard__feat">★ FEATURED</span>' : '';
+    return '<article class="bcard" data-open="' + p._id + '">' +
       '<div class="bcard__media">' +
-        '<img src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy">' +
-        '<button class="bcard__badge' + (saved ? " is-saved" : "") + '" data-save="' + p._id + '" aria-label="Save">' + bookmark(saved) + '</button>' +
+        '<img src="' + p.img + '" alt="' + esc(p.name) + '" loading="lazy">' + feat +
       '</div>' +
       '<div class="bcard__body">' +
         '<p class="bcard__name">' + esc(p.name) + ', turning ' + p.age + ' 🎉</p>' +
@@ -64,7 +68,7 @@
       '</div>' +
       '<div class="bcard__foot">' +
         '<button class="bcard__act' + (liked ? " is-liked" : "") + '" data-like="' + p._id + '">' + heart(liked) + '<span>' + (p.likes + (liked ? 1 : 0)) + '</span></button>' +
-        '<button class="bcard__act" data-share="' + p._id + '">' + shareIcon + '</button>' +
+        '<button class="bcard__act" data-share="' + p._id + '">' + shareIcon + '<span>Share</span></button>' +
         '<span class="bcard__date">' + esc(p.date) + '</span>' +
       '</div>' +
     '</article>';
@@ -91,18 +95,117 @@
   $("[data-search]").addEventListener("input", function (e) { state.q = e.target.value; state.shown = 8; render(); });
   $("[data-more-btn]").addEventListener("click", function () { state.shown += 8; render(); });
 
-  // Date pick — demo stub (real calendar wired later)
-  $("[data-datepick]").addEventListener("click", function () { toast("Date picker opens here — pick any day to see who's celebrated."); });
+  /* ---- Range calendar (Figma 6:17104): two months, presets, start–end range ---- */
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var calWrap = $(".wallbar__pickwrap"), calBox = $("[data-calendar]"),
+      grid1 = $("[data-cal-grid-1]"), grid2 = $("[data-cal-grid-2]"),
+      lbl1 = $("[data-cal-label-1]"), lbl2 = $("[data-cal-label-2]"),
+      dateLabel = $("[data-datelabel]"), pickBtn = $("[data-datepick]"),
+      startInp = $("[data-cal-start]"), endInp = $("[data-cal-end]");
+  var today = new Date(2026, 8, 28); // demo "today" (Sep 28, 2026)
+  var view = new Date(today.getFullYear(), today.getMonth(), 1);  // left month
+  var rStart = new Date(today), rEnd = new Date(today);           // committed range
+  var pStart = new Date(today), pEnd = new Date(today);           // pending (in-picker) range
+
+  function fmt(d) { return d ? MONTHS[d.getMonth()].slice(0,3) + " " + d.getDate() + ", " + d.getFullYear() : "—"; }
+  function key(d) { return d.getFullYear()*10000 + d.getMonth()*100 + d.getDate(); }
+  function sameDay(a, b) { return a && b && key(a)===key(b); }
+  function inRange(d) { if (!pStart || !pEnd) return false; var k=key(d); var a=Math.min(key(pStart),key(pEnd)), b=Math.max(key(pStart),key(pEnd)); return k>=a && k<=b; }
+
+  function monthHTML(base, grid) {
+    // Monday-first grid
+    var y=base.getFullYear(), m=base.getMonth();
+    var first = (new Date(y, m, 1).getDay() + 6) % 7;
+    var days = new Date(y, m+1, 0).getDate();
+    var prevDays = new Date(y, m, 0).getDate();
+    var html="";
+    for (var i=first-1;i>=0;i--) html += '<button class="wcal__day is-out" tabindex="-1">'+(prevDays-i)+'</button>';
+    for (var d=1;d<=days;d++) {
+      var cur=new Date(y,m,d);
+      var isS=sameDay(cur,pStart), isE=sameDay(cur,pEnd), rng=inRange(cur);
+      var cls="wcal__day"+(sameDay(cur,today)?" is-today":"")+(rng?" is-inrange":"")+((isS||isE)?" is-end":"");
+      html += '<button class="'+cls+'" data-pick="'+y+'-'+m+'-'+d+'">'+d+'</button>';
+    }
+    var trail = (7 - ((first+days)%7)) % 7;
+    for (var t=1;t<=trail;t++) html += '<button class="wcal__day is-out" tabindex="-1">'+t+'</button>';
+    grid.innerHTML = html;
+  }
+  function buildCal() {
+    var next = new Date(view.getFullYear(), view.getMonth()+1, 1);
+    lbl1.textContent = MONTHS[view.getMonth()] + " " + view.getFullYear();
+    lbl2.textContent = MONTHS[next.getMonth()] + " " + next.getFullYear();
+    monthHTML(view, grid1); monthHTML(next, grid2);
+    startInp.textContent = fmt(pStart); endInp.textContent = fmt(pEnd);
+  }
+  function openCal(o) { if (!calBox) return; calBox.hidden=!o; calWrap.classList.toggle("is-open",o);
+    if (pickBtn) pickBtn.setAttribute("aria-expanded", o?"true":"false");
+    if (o) { pStart=new Date(rStart); pEnd=new Date(rEnd); view=new Date(rStart.getFullYear(), rStart.getMonth(), 1); buildCal(); } }
+
+  if (pickBtn) pickBtn.addEventListener("click", function (e) { e.stopPropagation(); openCal(calBox.hidden); });
+
+  function onPick(e) {
+    var b=e.target.closest("[data-pick]"); if(!b) return;
+    var p=b.getAttribute("data-pick").split("-"); var d=new Date(+p[0],+p[1],+p[2]);
+    if (!pStart || (pStart && pEnd)) { pStart=d; pEnd=null; }        // begin new range
+    else { if (key(d) < key(pStart)) { pEnd=pStart; pStart=d; } else pEnd=d; } // complete range
+    buildCal();
+  }
+  if (grid1) grid1.addEventListener("click", onPick);
+  if (grid2) grid2.addEventListener("click", onPick);
+
+  $("[data-cal-prev]").addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()-1); buildCal(); });
+  $("[data-cal-next]").addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()+1); buildCal(); });
+
+  // Presets
+  function startOfWeek(d){ var x=new Date(d); var day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return x; }
+  var presetBox = $("[data-cal-presets]");
+  if (presetBox) presetBox.addEventListener("click", function (e) {
+    var b=e.target.closest("[data-preset]"); if(!b) return;
+    $$("[data-preset]", presetBox).forEach(function(x){ x.classList.toggle("is-active", x===b); });
+    var p=b.getAttribute("data-preset"), s=new Date(today), en=new Date(today);
+    if (p==="yesterday"){ s.setDate(s.getDate()-1); en=new Date(s); }
+    else if (p==="week"){ s=startOfWeek(today); en=new Date(s); en.setDate(en.getDate()+6); }
+    else if (p==="lastweek"){ s=startOfWeek(today); s.setDate(s.getDate()-7); en=new Date(s); en.setDate(en.getDate()+6); }
+    else if (p==="month"){ s=new Date(today.getFullYear(),today.getMonth(),1); en=new Date(today.getFullYear(),today.getMonth()+1,0); }
+    else if (p==="lastmonth"){ s=new Date(today.getFullYear(),today.getMonth()-1,1); en=new Date(today.getFullYear(),today.getMonth(),0); }
+    else if (p==="year"){ s=new Date(today.getFullYear(),0,1); en=new Date(today.getFullYear(),11,31); }
+    else if (p==="lastyear"){ s=new Date(today.getFullYear()-1,0,1); en=new Date(today.getFullYear()-1,11,31); }
+    else if (p==="all"){ s=new Date(2020,0,1); en=new Date(today); }
+    pStart=s; pEnd=en; view=new Date(s.getFullYear(), s.getMonth(), 1); buildCal();
+  });
+
+  $("[data-cal-cancel]").addEventListener("click", function (e){ e.stopPropagation(); openCal(false); });
+  $("[data-cal-apply]").addEventListener("click", function (e){
+    e.stopPropagation();
+    if (!pStart) return;
+    rStart=new Date(pStart); rEnd=new Date(pEnd||pStart);
+    dateLabel.textContent = sameDay(rStart,rEnd) ? fmt(rStart) : fmt(rStart)+" – "+fmt(rEnd);
+    openCal(false);
+    toast(sameDay(rStart,rEnd) ? "Showing birthdays for "+fmt(rStart)+"." : "Showing "+fmt(rStart)+" – "+fmt(rEnd)+".");
+  });
+
+  /* ---- Filter By dropdown ---- */
+  var filterWrap = $(".wallbar__filterwrap"), filterMenu = $("[data-filtermenu]"),
+      filterBtn = $("[data-filterby]"), filterLabel = $("[data-filterlabel]");
+  var SORT_NAMES = { recent: "Most recent", loved: "Most loved", az: "Name (A–Z)" };
+  function openFilter(o) { if (!filterMenu) return; filterMenu.hidden = !o; filterWrap.classList.toggle("is-open", o);
+    if (filterBtn) filterBtn.setAttribute("aria-expanded", o ? "true" : "false"); }
+  if (filterBtn) filterBtn.addEventListener("click", function (e) { e.stopPropagation(); openFilter(filterMenu.hidden); });
+  if (filterMenu) filterMenu.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-sort]"); if (!b) return;
+    state.sort = b.getAttribute("data-sort");
+    $$("[data-sort]", filterMenu).forEach(function (x) { x.classList.toggle("is-active", x === b); });
+    filterLabel.textContent = SORT_NAMES[state.sort]; openFilter(false); state.shown = 8; render();
+  });
+
+  document.addEventListener("click", function () { openCal(false); openFilter(false); });
 
   /* ---- Card interactions ---- */
   grid.addEventListener("click", function (e) {
     var like = e.target.closest("[data-like]");
     var share = e.target.closest("[data-share]");
-    var save = e.target.closest("[data-save]");
     var open = e.target.closest("[data-open]");
     if (like) { e.stopPropagation(); var id = +like.getAttribute("data-like"); state.liked[id] = !state.liked[id]; render(); return; }
-    if (save) { e.stopPropagation(); var sid = +save.getAttribute("data-save"); state.saved[sid] = !state.saved[sid]; render();
-      toast(state.saved[sid] ? "Saved to your list." : "Removed from saved."); return; }
     if (share) { e.stopPropagation(); var p = PEOPLE[+share.getAttribute("data-share")];
       var url = location.origin + location.pathname + "?wish=" + encodeURIComponent(p.name);
       if (navigator.share) { navigator.share({ title: "Happy Birthday " + p.name, text: p.msg, url: url }).catch(function(){}); }
@@ -116,10 +219,38 @@
   function closeModals() { $$(".wmodal, .wconfirm").forEach(function (m) { m.classList.remove("show"); }); document.body.style.overflow = ""; }
   $$("[data-post-open]").forEach(function (b) {
     b.addEventListener("click", function () {
-      if (!USER.signedIn) return openModal("gate-auth");
-      if (!USER.subscribed) return openModal("gate-sub");
+      // Not signed in → show the "Sign in to post" modal (Figma 9:2029 / 9:2094).
+      if (!USER.signedIn) { openModal("signin"); return; }
+      // Signed in but no plan → send to pricing (homepage #plans is the paywall reference).
+      if (!USER.subscribed) { location.href = "index.html#plans"; return; }
       openModal("post");
     });
+  });
+
+  /* Password eye toggle inside the sign-in modal */
+  $$("[data-eye]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var inp = b.parentNode.querySelector("input");
+      if (!inp) return;
+      inp.type = inp.type === "password" ? "text" : "password";
+      b.classList.toggle("is-on", inp.type === "text");
+    });
+  });
+
+  /* Sign-in modal submit (demo: mark signed in, then continue toward posting) */
+  var signinForm = $("[data-signin-form]");
+  if (signinForm) signinForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = $("#si-email"), pw = $("#si-pw"), ok = true;
+    [[email, /^[^@\s]+@[^@\s]+\.[^@\s]+$/], [pw, null]].forEach(function (f) {
+      var bad = !f[0].value.trim() || (f[1] && !f[1].test(f[0].value));
+      f[0].closest(".wfield").classList.toggle("has-error", bad); if (bad) ok = false;
+    });
+    if (!ok) return;
+    USER.signedIn = true; closeModals();
+    // Continue the original intent: post if subscribed, else pricing.
+    if (!USER.subscribed) { location.href = "index.html#plans"; return; }
+    openModal("post");
   });
   $$("[data-modal-close]").forEach(function (b) { b.addEventListener("click", closeModals); });
   document.addEventListener("mousedown", function (e) {

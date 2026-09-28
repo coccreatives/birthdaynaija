@@ -68,13 +68,13 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="wallhero">
-  <img class="wallhero__bg" src="assets/img/wall-1.webp" alt="" aria-hidden="true">
+  <img class="wallhero__bg" src="assets/img/wall-hero.webp" alt="" aria-hidden="true">
   <span class="wallhero__glow" aria-hidden="true"></span>
-  <div class="container wallhero__inner">
-    <p class="wallhero__eyebrow">Birthday Wall</p>
+  <div class="wallhero__inner">
+    <span class="wallhero__badge">Birthday Wall</span>
     <h1 class="wallhero__title">Today, somebody deserves to feel remembered.</h1>
-    <p class="wallhero__sub">Meet the people Nigeria is celebrating, and make sure someone you love is on the wall this year.</p>
-    <button class="btn btn--lg btn--grad wallhero__cta" data-post-open>Post a birthday wish</button>
+    <p class="wallhero__sub">Meet the people Nigeria is celebrating, and add someone you love so their day never passes quietly.</p>
+    <button class="btn btn--grad wallhero__cta" data-post-open>The birthday wall</button>
   </div>
 </section>
 
@@ -87,13 +87,73 @@
       <button class="wallbar__tab" data-range="month">This month</button>
     </div>
     <div class="wallbar__right">
-      <button class="wallbar__pick" data-datepick>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
-        <span data-datelabel>Pick a date</span>
-      </button>
+      <div class="wallbar__pickwrap">
+        <button class="wallbar__field" data-datepick aria-haspopup="dialog" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+          <span data-datelabel>Sep 28, 2026</span>
+        </button>
+        <div class="wcal" data-calendar hidden role="dialog" aria-label="Pick a date range">
+          <div class="wcal__presets" data-cal-presets>
+            <button data-preset="today">Today</button>
+            <button data-preset="yesterday">Yesterday</button>
+            <button data-preset="week">This week</button>
+            <button data-preset="lastweek">Last week</button>
+            <button data-preset="month">This month</button>
+            <button data-preset="lastmonth">Last month</button>
+            <button data-preset="year">This year</button>
+            <button data-preset="lastyear">Last year</button>
+            <button data-preset="all">All time</button>
+          </div>
+          <div class="wcal__main">
+            <div class="wcal__months">
+              <div class="wcal__month">
+                <div class="wcal__head">
+                  <button class="wcal__nav" data-cal-prev aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+                  <span class="wcal__label" data-cal-label-1>September 2026</span>
+                  <span class="wcal__navspacer"></span>
+                </div>
+                <div class="wcal__dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+                <div class="wcal__grid" data-cal-grid-1></div>
+              </div>
+              <div class="wcal__month">
+                <div class="wcal__head">
+                  <span class="wcal__navspacer"></span>
+                  <span class="wcal__label" data-cal-label-2>October 2026</span>
+                  <button class="wcal__nav" data-cal-next aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+                </div>
+                <div class="wcal__dow"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+                <div class="wcal__grid" data-cal-grid-2></div>
+              </div>
+            </div>
+            <div class="wcal__foot">
+              <div class="wcal__inputs">
+                <span class="wcal__inp" data-cal-start>Sep 28, 2026</span>
+                <span class="wcal__dash">–</span>
+                <span class="wcal__inp" data-cal-end>Sep 28, 2026</span>
+              </div>
+              <div class="wcal__actions">
+                <button class="wcal__cancel" data-cal-cancel type="button">Cancel</button>
+                <button class="wcal__apply" data-cal-apply type="button">Apply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wallbar__filterwrap">
+        <button class="wallbar__field" data-filterby aria-haspopup="listbox" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18M6 8h12M9 12h6M11 16h2"/></svg>
+          <span data-filterlabel>Filter By</span>
+          <svg class="wallbar__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="wfilter" data-filtermenu hidden role="listbox">
+          <button data-sort="recent" class="is-active" role="option">Most recent</button>
+          <button data-sort="loved" role="option">Most loved</button>
+          <button data-sort="az" role="option">Name (A–Z)</button>
+        </div>
+      </div>
       <div class="wallbar__search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="search" placeholder="Search a name" data-search>
+        <input type="search" placeholder="Search by name" data-search>
       </div>
     </div>
   </div>
@@ -109,7 +169,7 @@
     <button class="btn btn--grad" data-post-open style="margin-top:8px">Post a birthday wish</button>
   </div>
   <div class="wallmore" data-more>
-    <button class="btn btn--grey" data-more-btn>Load more</button>
+    <button class="wallmore__btn" data-more-btn type="button">Show More</button>
   </div>
 </main>
 
@@ -118,6 +178,7 @@
   <div class="wallcta">
     <span class="wallcta__glow" aria-hidden="true"></span>
     <h2 class="wallcta__title">Someone's birthday is coming. Make sure they know they matter.</h2>
+    <p class="wallcta__sub">Put their name on the Wall with a photo and a message from the heart. We will help the whole country celebrate with you.</p>
     <button class="btn btn--lg btn--grad wallcta__btn" data-post-open>Celebrate someone now</button>
   </div>
 </section>
@@ -236,29 +297,39 @@
   </div>
 </div>
 
-<!-- Gate: not signed in -->
-<div class="wconfirm" data-modal="gate-auth">
-  <div class="wconfirm__card">
-    <div class="wconfirm__icon wconfirm__icon--brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5M15 12H3"/></svg></div>
-    <h2 class="wconfirm__title">Sign in to post</h2>
-    <p class="wconfirm__text">Create a free account or log in to post a birthday wish to the wall.</p>
-    <div class="wconfirm__foot">
-      <a class="btn btn--grey" href="login.html">Log in</a>
-      <a class="btn btn--grad" href="register.html">Sign up</a>
-    </div>
-  </div>
-</div>
-
-<!-- Gate: signed in, no subscription -->
-<div class="wconfirm" data-modal="gate-sub">
-  <div class="wconfirm__card">
-    <div class="wconfirm__icon wconfirm__icon--warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-    <h2 class="wconfirm__title">Unlock posting to the wall</h2>
-    <p class="wconfirm__text">Choose a plan to post birthday wishes, get a wall slot and celebrate the people you love all year.</p>
-    <div class="wconfirm__foot">
-      <button class="btn btn--grey" data-modal-close type="button">Not now</button>
-      <a class="btn btn--grad" href="index.html#plans">See plans</a>
-    </div>
+<!-- ===================== SIGN IN TO POST MODAL (Figma 9:2029 / 9:2094) ===================== -->
+<div class="wmodal wmodal--auth" data-modal="signin" aria-hidden="true">
+  <div class="wauth" role="dialog" aria-modal="true" aria-label="Sign in to post">
+    <button class="wmodal__close wauth__close" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="wauth__logo"><img src="assets/img/bn-logo.svg" alt="BirthdayNaija TV" width="52" height="52"></div>
+    <h2 class="wauth__title">Sign in to post</h2>
+    <p class="wauth__sub">Welcome back! Please enter your details.</p>
+    <form class="wauth__form" data-signin-form novalidate>
+      <div class="wfield">
+        <label class="wfield__label" for="si-email">Email</label>
+        <input class="wfield__input" id="si-email" type="email" placeholder="Enter your email" required>
+        <span class="wfield__err">Enter a valid email address.</span>
+      </div>
+      <div class="wfield">
+        <label class="wfield__label" for="si-pw">Password</label>
+        <div class="wauth__pw">
+          <input class="wfield__input" id="si-pw" type="password" placeholder="Enter your password" required>
+          <button type="button" class="wauth__eye" data-eye aria-label="Show password">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="wfield__err">Enter your password.</span>
+      </div>
+      <div class="wauth__row">
+        <label class="wauth__check"><input type="checkbox"> Remember for 30 days</label>
+        <a class="wauth__link" href="forgot.html">Forgot password</a>
+      </div>
+      <button type="submit" class="btn btn--grad wauth__submit">Sign in</button>
+      <button type="button" class="wauth__google"><img src="assets/icons/google.svg" alt="" width="18" height="18"> Sign in with Google</button>
+    </form>
+    <p class="wauth__foot">Don't have an account? <a class="wauth__link" href="register.html">Sign up</a></p>
   </div>
 </div>
 
