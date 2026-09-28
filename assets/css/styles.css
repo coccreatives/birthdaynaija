@@ -146,7 +146,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__links a, .nav__signin { position: relative; }
 .nav__links a::after, .nav__signin::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3)); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
 .nav__links a:hover::after, .nav__signin:hover::after { transform: scaleX(1); }
-.nav__actions { display: flex; align-items: center; gap: 24px; }
+.nav__actions { display: flex; align-items: center; gap: 16px; }
+.nav__login { font-family: var(--poppins); font-weight: 600; font-size: 14px; color: var(--ink); white-space: nowrap; transition: color .3s var(--ease); }
+.nav__login:hover { color: var(--red); }
 .nav__signin { font-weight: 600; font-size: 14px; line-height: 21px; }
 .nav__menu { display: none; width: 24px; height: 24px; }
 .nav__burger { position: relative; display: block; width: 24px; height: 24px; }
