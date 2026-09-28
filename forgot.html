@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forgot password | BirthdayNaija</title>
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body class="auth-body">
+  <main class="auth auth--center">
+    <div class="auth__content">
+      <div class="auth__header">
+        <span class="auth__feat" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.5 12.5 6-6"/><path d="m16 8 2 2 3-3-2-2"/></svg>
+        </span>
+        <div style="display:flex; flex-direction:column; gap:12px; align-items:center; text-align:center">
+          <h1 class="auth__title">Forgot password?</h1>
+          <p class="auth__subtitle">No worries, we'll send you reset instructions.</p>
+        </div>
+      </div>
+
+      <form class="auth__form" data-auth-form data-next="check-email.html" novalidate>
+        <div class="auth-field">
+          <label class="auth-field__label" for="email">Email</label>
+          <div class="auth-input-wrap"><input class="auth-input" id="email" type="email" placeholder="Enter your email" required></div>
+          <span class="auth-field__error">Enter a valid email address.</span>
+        </div>
+        <div class="auth-actions">
+          <button type="submit" class="auth-btn auth-btn--grad">Reset password</button>
+        </div>
+      </form>
+
+      <a class="auth-back" href="login.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        Back to log in
+      </a>
+    </div>
+  </main>
+  <script src="assets/js/auth.js" defer></script>
+</body>
+</html>

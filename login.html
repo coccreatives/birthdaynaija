@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in | BirthdayNaija</title>
+<meta name="description" content="Log in to your BirthdayNaija account.">
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/auth.css">
+</head>
+<body class="auth-body">
+  <main class="auth">
+    <section class="auth__form-col">
+      <div class="auth__content">
+        <div class="auth__header">
+          <span class="auth__logo" aria-hidden="true"><b>BN</b><i>tv</i></span>
+          <div class="auth__header--left" style="align-items:center; text-align:center; display:flex; flex-direction:column; gap:12px; width:100%">
+            <h1 class="auth__title">Welcome back</h1>
+            <p class="auth__subtitle">Welcome back! Please enter your details.</p>
+          </div>
+        </div>
+
+        <form class="auth__form" data-auth-form data-next="dashboard.html" novalidate>
+          <div class="auth-field">
+            <label class="auth-field__label" for="email">Email</label>
+            <div class="auth-input-wrap"><input class="auth-input" id="email" type="email" placeholder="Enter your email" required></div>
+            <span class="auth-field__error">Enter a valid email address.</span>
+          </div>
+          <div class="auth-field">
+            <label class="auth-field__label" for="password">Password</label>
+            <div class="auth-input-wrap">
+              <input class="auth-input auth-input--pw" id="password" type="password" placeholder="••••••••" required>
+              <button type="button" class="auth-eye" data-eye aria-label="Show password"></button>
+            </div>
+            <span class="auth-field__error">Enter your password.</span>
+          </div>
+
+          <div class="auth-row">
+            <label class="auth-check"><input type="checkbox"> Remember for 30 days</label>
+            <a class="auth-link" href="forgot.html">Forgot password</a>
+          </div>
+
+          <div class="auth-actions">
+            <button type="submit" class="auth-btn auth-btn--grad">Sign in</button>
+            <button type="button" class="auth-btn auth-btn--google"><img src="assets/icons/google.svg" alt=""> Sign in with Google</button>
+          </div>
+        </form>
+
+        <div class="auth-foot">
+          <span>Don't have an account?</span> <a class="auth-link" href="register.html">Sign up</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth__image-col">
+      <div class="auth__image">
+        <img src="assets/img/auth-hero.png" alt="A person celebrating a birthday">
+        <div class="auth__quote">
+          <div class="auth__quote-card">
+            <p>Every birthday and every life matters. We put your name on our Birthday Wall, send you a birthday shoutout, and make sure someone celebrates you, every single year.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="assets/js/auth.js" defer></script>
+</body>
+</html>
