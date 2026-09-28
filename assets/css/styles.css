@@ -174,7 +174,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 24px;
   padding: 12px 24px 28px;
   background: #0a0a0a;
@@ -198,7 +197,7 @@ body.menu-open { overflow: hidden; }
 .mobile-menu__glow { position: absolute; z-index: 0; border-radius: 999px; filter: blur(60px); pointer-events: none; opacity: 0; transition: opacity .8s var(--ease) .1s; }
 .mobile-menu.is-open .mobile-menu__glow { opacity: .6; }
 .mobile-menu__glow--pink { display: none; }
-.mobile-menu__glow--gold { right: -70px; bottom: 140px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,142,83,.55), transparent 70%); }
+.mobile-menu__glow--gold { display: none; }
 
 .mobile-menu__top { position: relative; z-index: 1; flex: none; height: 68px; display: flex; align-items: center; justify-content: space-between; }
 /* Higher specificity than the mobile ".brand { color:#000 }" rule further down,
@@ -217,7 +216,7 @@ body.menu-open { overflow: hidden; }
 .mobile-menu__close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 .mobile-menu__close:hover { background: rgba(255,255,255,.08); transform: rotate(90deg); }
 
-.mobile-menu__links { position: relative; z-index: 1; flex: 1 1 auto; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; overflow-y: hidden; }
+.mobile-menu__links { position: relative; z-index: 1; flex: 0 0 auto; margin-top: 4px; display: flex; flex-direction: column; gap: 2px; }
 .mobile-menu__links a {
   padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.08);
   font-family: var(--poppins); font-weight: 500; font-size: 22px; color: #fff;
@@ -233,7 +232,7 @@ body.menu-open { overflow: hidden; }
 .mobile-menu.is-open .mobile-menu__links a:nth-child(6) { transition-delay: .33s; }
 
 .mobile-menu__bottom {
-  position: relative; z-index: 1; flex: none; display: flex; flex-direction: column; align-items: center; gap: 28px;
+  position: relative; z-index: 1; flex: none; margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 28px;
   opacity: 0; transform: translateY(14px); transition: opacity .45s var(--ease) .3s, transform .45s var(--ease) .3s;
 }
 .mobile-menu.is-open .mobile-menu__bottom { opacity: 1; transform: none; }

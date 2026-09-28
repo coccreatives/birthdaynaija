@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Birthday Wall | BirthdayNaija</title>
+<meta name="description" content="See who Nigeria is celebrating today. Every name, every year — on the BirthdayNaija Wall.">
+<meta name="theme-color" content="#151313">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/wall.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="nav__inner">
+    <a class="brand" href="index.html" aria-label="BirthdayNaijatv home">
+      <img class="brand__logo" src="assets/img/bn-logo.svg" alt="" width="40" height="40">
+      <span class="brand__word">BirthdayNaijatv</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="wall.html">Birthday Wall</a>
+      <a href="index.html#ways" data-go-slide="0">Shoutout</a>
+      <!-- Gift hibernated: <a href="index.html#ways" data-go-slide="2">Gift</a> -->
+      <a href="index.html#plans">Nation 365</a>
+      <a href="index.html#friday-live">Friday Live</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--grey btn--nav" href="login.html">Log in</a>
+      <a class="btn btn--grad btn--nav" href="register.html">Sign up</a>
+    </div>
+    <button class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="nav__burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <span class="mobile-menu__glow mobile-menu__glow--pink" aria-hidden="true"></span>
+    <span class="mobile-menu__glow mobile-menu__glow--gold" aria-hidden="true"></span>
+    <div class="mobile-menu__top">
+      <a class="brand brand--menu" href="index.html" aria-label="BirthdayNaijatv home">
+        <img class="brand__logo" src="assets/img/bn-logo.svg" alt="" width="36" height="36">
+        <span class="brand__word">BirthdayNaijatv</span>
+      </a>
+      <button class="mobile-menu__close" type="button" data-menu-close aria-label="Close menu"></button>
+    </div>
+    <nav class="mobile-menu__links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="wall.html">Birthday Wall</a>
+      <a href="index.html#ways" data-go-slide="0">Shoutout</a>
+      <!-- Gift hibernated -->
+      <a href="index.html#plans">Nation 365</a>
+      <a href="index.html#friday-live">Friday Live</a>
+    </nav>
+    <div class="mobile-menu__bottom">
+      <a class="btn btn--grey mobile-menu__cta" href="login.html">Log in</a>
+      <a class="btn btn--grad mobile-menu__cta" href="register.html">Sign up</a>
+      <div class="mobile-menu__socials">
+        <p>Connect with the club</p>
+        <div class="mobile-menu__social-row">
+          <a href="#instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" width="18" height="18"></a>
+          <a href="#x" aria-label="X"><img src="assets/icons/circle-x.svg" alt="" width="18" height="18"></a>
+          <a href="#youtube" aria-label="YouTube"><img src="assets/icons/youtube.svg" alt="" width="22" height="22"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="wallhero">
+  <img class="wallhero__bg" src="assets/img/wall-1.webp" alt="" aria-hidden="true">
+  <span class="wallhero__glow" aria-hidden="true"></span>
+  <div class="container wallhero__inner">
+    <p class="wallhero__eyebrow">Birthday Wall</p>
+    <h1 class="wallhero__title">Today, somebody deserves to feel remembered.</h1>
+    <p class="wallhero__sub">Meet the people Nigeria is celebrating, and make sure someone you love is on the wall this year.</p>
+    <button class="btn btn--lg btn--grad wallhero__cta" data-post-open>Post a birthday wish</button>
+  </div>
+</section>
+
+<!-- ===================== FILTER BAR ===================== -->
+<div class="container">
+  <div class="wallbar">
+    <div class="wallbar__tabs" role="tablist">
+      <button class="wallbar__tab is-active" data-range="today">Today</button>
+      <button class="wallbar__tab" data-range="week">This week</button>
+      <button class="wallbar__tab" data-range="month">This month</button>
+    </div>
+    <div class="wallbar__right">
+      <button class="wallbar__pick" data-datepick>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
+        <span data-datelabel>Pick a date</span>
+      </button>
+      <div class="wallbar__search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" placeholder="Search a name" data-search>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GRID ===================== -->
+<main class="container">
+  <div class="wallgrid" data-grid></div>
+  <div class="wallempty" data-empty>
+    <div class="wallempty__emoji">🎂</div>
+    <h3 class="wallempty__title">No birthdays here yet</h3>
+    <p class="wallempty__text">Be the first to celebrate someone — post a birthday wish and put a name on the wall.</p>
+    <button class="btn btn--grad" data-post-open style="margin-top:8px">Post a birthday wish</button>
+  </div>
+  <div class="wallmore" data-more>
+    <button class="btn btn--grey" data-more-btn>Load more</button>
+  </div>
+</main>
+
+<!-- ===================== CTA BAND ===================== -->
+<section class="container">
+  <div class="wallcta">
+    <span class="wallcta__glow" aria-hidden="true"></span>
+    <h2 class="wallcta__title">Someone's birthday is coming. Make sure they know they matter.</h2>
+    <button class="btn btn--lg btn--grad wallcta__btn" data-post-open>Celebrate someone now</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="brand brand--sm" href="index.html" aria-label="BirthdayNaijatv home">
+          <img class="brand__logo" src="assets/img/bn-logo.svg" alt="" width="34" height="34">
+          <span class="brand__word">BirthdayNaijatv</span>
+        </a>
+        <p>Every birthday and every life matters. Remembered every year, for everyone.</p>
+      </div>
+      <div class="footer__dirs">
+        <div class="footer__col">
+          <p class="footer__h">Explore</p>
+          <a href="wall.html">Birthday Wall</a><a href="index.html#ways" data-go-slide="0">Shoutouts</a><a href="index.html#club">The Club</a><a href="index.html#plans">Nation 365</a><a href="index.html#friday-live">Friday Live</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Company</p>
+          <a href="index.html#about">About</a><a href="index.html#goal">The 1,000,000 Birthday Goal</a><a href="index.html#ways" data-go-slide="1">For Business</a><a href="index.html#contact">Contact</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__h">Legal</p>
+          <a href="index.html#terms">Terms</a><a href="index.html#privacy">Privacy</a><a href="index.html#guidelines">Content Guidelines</a><a href="index.html#refunds">Refunds</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> BirthdayNaija. Built in Nigeria, for Nigeria.</p>
+      <div class="footer__social">
+        <a href="#instagram" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" width="19" height="19"></a>
+        <a href="#x" aria-label="X"><img src="assets/icons/circle-x.svg" alt="" width="19" height="19"></a>
+        <a href="#youtube" aria-label="YouTube" data-ico="youtube"><img src="assets/icons/youtube.svg" alt="" width="25" height="25"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== POST TO WALL MODAL (node 6:17024) ===================== -->
+<div class="wmodal" data-modal="post" aria-hidden="true">
+  <div class="wmodal__card" role="dialog" aria-modal="true" aria-label="Post to the birthday wall">
+    <div class="wmodal__head">
+      <div class="wmodal__head-txt">
+        <h2>Post to the birthday wall</h2>
+        <p>Share a memory, a wish, or a little love for someone special.</p>
+      </div>
+      <button class="wmodal__close" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form class="wmodal__body" data-post-form novalidate>
+      <div class="wfield">
+        <label class="wfield__label" for="w-msg">Your birthday message <span data-count>0 / 500</span></label>
+        <textarea class="wfield__area" id="w-msg" maxlength="500" placeholder="Happy birthday! Your joy is contagious and your courage inspires everyone around you. 🎉" required></textarea>
+        <span class="wfield__err">Please write a short message.</span>
+      </div>
+
+      <div class="wfield">
+        <label class="wfield__label">Add a photo or video <span>Optional</span></label>
+        <label class="wupload" for="w-file">
+          <span class="wupload__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg></span>
+          <p class="wupload__t"><b>Click to upload</b> or drag and drop</p>
+          <p class="wupload__h">PNG, JPG, MP4 (max 3mb)</p>
+          <input type="file" id="w-file" accept="image/*,video/mp4" hidden>
+        </label>
+      </div>
+
+      <div class="wnotice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Your post will be visible on the public Birthday Wall after publishing.
+      </div>
+
+      <p class="wsection-label">Celebrant details</p>
+      <div class="wfield">
+        <label class="wfield__label" for="w-name">Celebrant full name</label>
+        <input class="wfield__input" id="w-name" placeholder="e.g. Chioma Nze" required>
+        <span class="wfield__err">Enter the celebrant's name.</span>
+      </div>
+      <div class="wfield">
+        <label class="wfield__label" for="w-dob">Date of birth</label>
+        <input class="wfield__input" id="w-dob" type="date" required>
+        <span class="wfield__err">Select a date of birth.</span>
+      </div>
+      <div class="wfield">
+        <label class="wfield__label" for="w-rel">Who are they to you?</label>
+        <input class="wfield__input" id="w-rel" placeholder="e.g. Sister, friend, colleague">
+      </div>
+
+      <p class="wsection-label">Your details</p>
+      <div class="wfield">
+        <label class="wfield__label" for="w-sender">Your name</label>
+        <input class="wfield__input" id="w-sender" placeholder="e.g. Nneoma Okoro" required>
+        <span class="wfield__err">Enter your name.</span>
+      </div>
+      <div class="wfield">
+        <label class="wfield__label" for="w-email">Your email</label>
+        <input class="wfield__input" id="w-email" type="email" placeholder="e.g. nneoma@example.com" required>
+        <span class="wfield__err">Enter a valid email.</span>
+      </div>
+      <div class="wfield">
+        <label class="wfield__label" for="w-phone">Your phone number</label>
+        <input class="wfield__input" id="w-phone" placeholder="e.g. +234 812 345 6789">
+      </div>
+
+      <label class="wconsent">
+        <input type="checkbox" id="w-consent" required>
+        <span>I have permission to use the photo, video and details I am submitting, and I understand the BirthdayNaija team reviews every entry before it is published.</span>
+      </label>
+    </form>
+    <div class="wmodal__foot">
+      <button class="btn btn--grey" data-modal-close type="button">Cancel</button>
+      <button class="btn btn--grad" data-post-submit type="button">Post to wall</button>
+    </div>
+  </div>
+</div>
+
+<!-- Gate: not signed in -->
+<div class="wconfirm" data-modal="gate-auth">
+  <div class="wconfirm__card">
+    <div class="wconfirm__icon wconfirm__icon--brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5M15 12H3"/></svg></div>
+    <h2 class="wconfirm__title">Sign in to post</h2>
+    <p class="wconfirm__text">Create a free account or log in to post a birthday wish to the wall.</p>
+    <div class="wconfirm__foot">
+      <a class="btn btn--grey" href="login.html">Log in</a>
+      <a class="btn btn--grad" href="register.html">Sign up</a>
+    </div>
+  </div>
+</div>
+
+<!-- Gate: signed in, no subscription -->
+<div class="wconfirm" data-modal="gate-sub">
+  <div class="wconfirm__card">
+    <div class="wconfirm__icon wconfirm__icon--warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <h2 class="wconfirm__title">Unlock posting to the wall</h2>
+    <p class="wconfirm__text">Choose a plan to post birthday wishes, get a wall slot and celebrate the people you love all year.</p>
+    <div class="wconfirm__foot">
+      <button class="btn btn--grey" data-modal-close type="button">Not now</button>
+      <a class="btn btn--grad" href="index.html#plans">See plans</a>
+    </div>
+  </div>
+</div>
+
+<div class="wtoast" data-toast></div>
+
+<script src="assets/js/main.js?v=20260924b" defer></script>
+<script src="assets/js/wall.js" defer></script>
+</body>
+</html>

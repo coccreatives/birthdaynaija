@@ -136,3 +136,12 @@
   .auth__title { font-size: 26px; }
   .otp input { width: 56px; height: 56px; font-size: 28px; }
 }
+
+/* Clickable logo + top-left back link (added per request) */
+a.auth__logo-link { display: inline-block; }
+.auth__back-top { position: absolute; top: 28px; left: 32px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--inter); font-weight: 600; font-size: 14px; color: var(--text-800); z-index: 5;
+  transition: color .2s var(--ease); }
+.auth__back-top:hover { color: var(--ink); }
+.auth__back-top svg { width: 18px; height: 18px; }
+@media (max-width: 900px) { .auth__back-top { top: 16px; left: 16px; } }

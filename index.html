@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/styles.css?v=20260924b">
 <link rel="stylesheet" href="assets/css/forms.css?v=20260924b">
+<link rel="stylesheet" href="assets/css/wall.css">
 </head>
 <body>
 
@@ -22,7 +23,7 @@
     <nav class="nav__links" aria-label="Primary">
       <a href="#wall">Birthday Wall</a>
       <a href="#ways" data-go-slide="0">Shoutout</a>
-      <a href="#ways" data-go-slide="2">Gift</a>
+      <!-- Gift hibernated -->
       <a href="#plans">Nation 365</a>
       <a href="#friday-live">Friday Live</a>
     </nav>
@@ -39,7 +40,7 @@
     <span class="mobile-menu__glow mobile-menu__glow--gold" aria-hidden="true"></span>
     <div class="mobile-menu__top">
       <a class="brand brand--menu" href="#top" aria-label="BirthdayNaijatv home">
-        <span class="brand__mark" aria-hidden="true"><b>BN</b><i>tv</i></span>
+        <img class="brand__logo" src="assets/img/bn-logo.svg" alt="" width="36" height="36">
         <span class="brand__word">BirthdayNaijatv</span>
       </a>
       <button class="mobile-menu__close" type="button" data-menu-close aria-label="Close menu"></button>
@@ -48,7 +49,7 @@
       <a href="#top">Home</a>
       <a href="#wall">Birthday Wall</a>
       <a href="#ways" data-go-slide="0">Shoutout</a>
-      <a href="#ways" data-go-slide="2">Gift</a>
+      <!-- Gift hibernated -->
       <a href="#plans">Nation 365</a>
       <a href="#friday-live">Friday Live</a>
     </nav>
@@ -142,23 +143,55 @@
       <h2 class="h-xl wall__title reveal">See who Nigeria is celebrating today.</h2>
       <p class="body wall__text reveal">The Birthday Wall is where every birthday we celebrate lives: a daily, public record of the people Nigeria is celebrating. Browse today's celebrants, find someone by name or date, or add a name yourself. Entries start at <span data-price="oneoff.amount">₦500</span> and every entry is reviewed before it goes live. Club members get theirs automatically.</p>
     </div>
-    <div class="wall__grid" id="wall-grid">
-      <!-- Wall entries: wire to the approved celebrants feed. data-offset = days from today -->
-      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-1.webp" alt="Tunde Oye" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Tunde Oye</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-2.webp" alt="Chioma Nze" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Chioma Nze</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-3.webp" alt="Abubakar S." width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Abubakar S.</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard reveal" data-offset="0"><img src="assets/img/wall-4.webp" alt="Funmi Alao" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Funmi Alao</p><span class="tag"><span class="tag__date">Today</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard reveal" data-offset="1"><img src="assets/img/wall-5.webp" alt="Emeka Okoro" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Emeka Okoro</p><span class="tag"><span class="tag__date">Tomorrow</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard reveal" data-offset="1"><img src="assets/img/wall-6.webp" alt="Kemi Balogun" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Kemi Balogun</p><span class="tag"><span class="tag__date">Tomorrow</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard wcard--d reveal" data-offset="2"><img src="assets/img/wall-7.webp" alt="Yusuf D." width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Yusuf D.</p><span class="tag"><span class="tag__date">Soon</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-      <article class="wcard wcard--d reveal" data-offset="3"><img src="assets/img/wall-8.webp" alt="Ngozi Obi" width="600" height="600" loading="lazy"><div class="wcard__meta"><p class="wcard__name">Ngozi Obi</p><span class="tag"><span class="tag__date">Soon</span><img src="assets/icons/calendar.svg" alt="" width="14" height="14"></span></div></article>
-    </div>
-    <!-- Shown only when there are more entries than fit. Hidden entirely otherwise. -->
-    <div class="wall__more" data-wall-more hidden>
-      <button type="button" class="btn btn--lg btn--grad" data-wall-toggle aria-expanded="false" aria-controls="wall-grid">See more</button>
+    <div class="wallgrid wall__grid--teaser" id="wall-grid">
+      <!-- Teaser of the full Birthday Wall. Same card design as wall.html; wire to the approved feed. -->
+      <article class="bcard bcard--featured reveal">
+        <div class="bcard__media"><img src="assets/img/wall-1.webp" alt="Chinedu Okafor" loading="lazy"></div>
+        <div class="bcard__body">
+          <p class="bcard__name">Chinedu Okafor, turning 34 🎉</p>
+          <p class="bcard__msg">To Chinedu, a big brother whose laughter fills every room. Have the happiest day.</p>
+        </div>
+        <div class="bcard__foot">
+          <span class="bcard__act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg><span>42</span></span>
+          <span class="bcard__date">Today</span>
+        </div>
+      </article>
+      <article class="bcard reveal">
+        <div class="bcard__media"><img src="assets/img/wall-2.webp" alt="Zainab Bello" loading="lazy"></div>
+        <div class="bcard__body">
+          <p class="bcard__name">Zainab Bello, turning 29 🎉</p>
+          <p class="bcard__msg">Bright, kind and unstoppable. Wishing you a year as beautiful as your smile.</p>
+        </div>
+        <div class="bcard__foot">
+          <span class="bcard__act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg><span>18</span></span>
+          <span class="bcard__date">Today</span>
+        </div>
+      </article>
+      <article class="bcard reveal">
+        <div class="bcard__media"><img src="assets/img/wall-3.webp" alt="Ifeanyi Nwosu" loading="lazy"></div>
+        <div class="bcard__body">
+          <p class="bcard__name">Ifeanyi Nwosu, turning 41 🎉</p>
+          <p class="bcard__msg">Happy birthday to a man who shows up for everyone. Today we show up for you.</p>
+        </div>
+        <div class="bcard__foot">
+          <span class="bcard__act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg><span>27</span></span>
+          <span class="bcard__date">Today</span>
+        </div>
+      </article>
+      <article class="bcard reveal">
+        <div class="bcard__media"><img src="assets/img/wall-4.webp" alt="Nneoma Nwosu" loading="lazy"></div>
+        <div class="bcard__body">
+          <p class="bcard__name">Nneoma Nwosu, turning 51 🎉</p>
+          <p class="bcard__msg">Mummy, thank you for every sacrifice. Enjoy your special day.</p>
+        </div>
+        <div class="bcard__foot">
+          <span class="bcard__act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.5 1-1a5.5 5.5 0 0 0 0-7.9z"/></svg><span>63</span></span>
+          <span class="bcard__date">Today</span>
+        </div>
+      </article>
     </div>
     <div class="center reveal">
-      <a class="btn btn--lg btn--grad" href="form.html?plan=oneoff">Add a name to the wall</a>
+      <a class="btn btn--lg btn--grad" href="wall.html">See the full wall →</a>
     </div>
   </div>
 </section>
@@ -370,7 +403,7 @@
       <div class="footer__dirs">
         <div class="footer__col">
           <p class="footer__h">Explore</p>
-          <a href="#wall">Birthday Wall</a><a href="#ways" data-go-slide="0">Shoutouts</a><a href="#ways" data-go-slide="2">Gifts</a><a href="#club">The Club</a><a href="#plans">Nation 365</a><a href="#friday-live">Friday Live</a>
+          <a href="#wall">Birthday Wall</a><a href="#ways" data-go-slide="0">Shoutouts</a><a href="#club">The Club</a><a href="#plans">Nation 365</a><a href="#friday-live">Friday Live</a>
         </div>
         <div class="footer__col">
           <p class="footer__h">Company</p>
