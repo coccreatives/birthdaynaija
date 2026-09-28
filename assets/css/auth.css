@@ -43,6 +43,7 @@
   text-align: center; letter-spacing: -1px; }
 .auth__logo b { display: block; font-size: 18px; }
 .auth__logo i { display: block; font-size: 13px; font-style: normal; text-transform: lowercase; }
+.auth__logo-img { width: 48px; height: 48px; display: block; }
 
 /* Featured icon (key / lock / mail / check) */
 .auth__feat { width: 56px; height: 56px; border-radius: 12px; border: 1px solid var(--line);
