@@ -29,6 +29,17 @@
 
   var state = { range: "today", q: "", shown: 8, liked: {}, sort: "recent" };
 
+  /* Demo birthday dates (month is 0-based) — the calendar shows a dot on these days.
+     At backend time, populate BIRTHDAYS from the approved feed. */
+  var BIRTHDAYS = (function () {
+    var s = {};
+    [[2026,8,1],[2026,8,3],[2026,8,9],[2026,8,14],[2026,8,22],[2026,8,28],
+     [2026,9,2],[2026,9,7],[2026,9,15],[2026,9,19],[2026,9,26]]
+      .forEach(function (d) { s[d[0] + "-" + d[1] + "-" + d[2]] = true; });
+    return s;
+  })();
+  function hasBirthday(y, m, d) { return !!BIRTHDAYS[y + "-" + m + "-" + d]; }
+
   var grid = $("[data-grid]"), emptyBox = $("[data-empty]"), moreWrap = $("[data-more]");
 
   function heart(filled) {
@@ -124,7 +135,8 @@
       var cur=new Date(y,m,d);
       var isS=sameDay(cur,pStart), isE=sameDay(cur,pEnd), rng=inRange(cur);
       var cls="wcal__day"+(sameDay(cur,today)?" is-today":"")+(rng?" is-inrange":"")+((isS||isE)?" is-end":"");
-      html += '<button class="'+cls+'" data-pick="'+y+'-'+m+'-'+d+'">'+d+'</button>';
+      var dot = hasBirthday(y,m,d) ? '<i class="wcal__dot" aria-hidden="true"></i>' : '';
+      html += '<button class="'+cls+'" data-pick="'+y+'-'+m+'-'+d+'">'+d+dot+'</button>';
     }
     var trail = (7 - ((first+days)%7)) % 7;
     for (var t=1;t<=trail;t++) html += '<button class="wcal__day is-out" tabindex="-1">'+t+'</button>';
