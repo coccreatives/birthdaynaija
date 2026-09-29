@@ -54,7 +54,8 @@
 .wallbar__search input::placeholder { color: #404040; }
 
 /* Range calendar popover (Figma 6:17104) — presets rail + two months + range */
-.wcal { position: absolute; top: calc(100% + 8px); left: 0; z-index: 40; display: flex;
+/* Anchored to the RIGHT of the trigger so the two-month popover never clips the viewport edge. */
+.wcal { position: absolute; top: calc(100% + 8px); right: 0; left: auto; z-index: 40; display: flex;
   background: var(--white); border: 1px solid #e9e2de; border-radius: 16px; overflow: hidden;
   box-shadow: 0 20px 48px rgba(16,24,40,.18); animation: wpop .16s var(--ease); width: 720px; max-width: calc(100vw - 32px); }
 .wcal[hidden] { display: none; }
@@ -73,6 +74,7 @@
 .wcal__nav:hover { background: #f4f1ee; }
 .wcal__nav svg { width: 16px; height: 16px; }
 .wcal__navspacer { width: 28px; height: 28px; }
+.wcal__nav--m { display: none; }   /* mobile-only "next" arrow on the single month */
 .wcal__dow { display: grid; grid-template-columns: repeat(7, 1fr); }
 .wcal__dow span { text-align: center; font-family: var(--inter); font-size: 12px; font-weight: 500; color: #98a2b3; padding: 6px 0; }
 .wcal__grid { display: grid; grid-template-columns: repeat(7, 1fr); }
@@ -264,11 +266,12 @@
   .wallbar__right { width: 100%; margin-left: 0; flex-wrap: wrap; }
   .wallbar__search { flex: 1; min-width: 140px; }
   .wallgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  /* Calendar: drop the presets rail and stack the two months */
-  .wcal { flex-direction: column; width: min(360px, calc(100vw - 32px)); }
-  .wcal__presets { flex-direction: row; flex-wrap: wrap; width: 100%; border-right: 0; border-bottom: 1px solid #f0ece8; gap: 4px; }
-  .wcal__presets button { padding: 7px 10px; font-size: 12px; }
+  /* Mobile calendar: simplest form — no presets, one month, just prev/next + tap a date. */
+  .wcal { flex-direction: column; width: min(340px, calc(100vw - 32px)); }
+  .wcal__presets { display: none; }
   .wcal__months { flex-direction: column; gap: 16px; }
+  .wcal__month:nth-child(2) { display: none; }   /* single month */
+  .wcal__nav--m { display: grid; }               /* reveal the "next" arrow on month 1 */
   .wcal__foot { flex-direction: column; align-items: stretch; }
   .wcal__actions { justify-content: flex-end; }
 }

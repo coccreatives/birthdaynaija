@@ -165,8 +165,8 @@
   if (grid1) grid1.addEventListener("click", onPick);
   if (grid2) grid2.addEventListener("click", onPick);
 
-  $("[data-cal-prev]").addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()-1); buildCal(); });
-  $("[data-cal-next]").addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()+1); buildCal(); });
+  $$("[data-cal-prev]").forEach(function(b){ b.addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()-1); buildCal(); }); });
+  $$("[data-cal-next]").forEach(function(b){ b.addEventListener("click", function (e){ e.stopPropagation(); view.setMonth(view.getMonth()+1); buildCal(); }); });
 
   // Presets
   function startOfWeek(d){ var x=new Date(d); var day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); return x; }
