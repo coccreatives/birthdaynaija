@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celebrate a birthday | BirthdayNaija</title>
+<meta name="description" content="Post a birthday celebration to the Wall — your plan decides what you can send.">
+<meta name="theme-color" content="#111111">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/celebrate.css">
+</head>
+<body class="cb-body">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="brand" href="index.html#top" aria-label="BirthdayNaijatv home">
+      <img class="brand__logo" src="assets/img/bn-logo.svg" alt="" width="36" height="36">
+      <span class="brand__word">BirthdayNaijatv</span>
+    </a>
+    <a class="cb-nav__back" href="index.html">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to site
+    </a>
+  </div>
+</header>
+
+<main class="cb">
+  <div class="cb__wrap">
+
+    <!-- LEFT: the plan the system already knows the user is on -->
+    <aside class="cb__aside" data-plan-card></aside>
+
+    <!-- RIGHT: the adaptive form (or a gate when no valid entitlement) -->
+    <section class="cb__main">
+      <div data-form-wrap>
+        <h1 class="cb__title">Celebrate a birthday</h1>
+        <p class="cb__lead" data-form-lead></p>
+
+        <form class="cb__form" data-celebrate-form novalidate>
+
+          <!-- Who — family plans choose a covered person -->
+          <fieldset class="cb-group" data-who-group>
+            <legend class="cb-group__h">Who are you celebrating?</legend>
+            <div class="cb-people" data-people hidden></div>
+            <div class="cb-field" data-name-field>
+              <label class="cb-field__label" for="cb-name">Celebrant's full name</label>
+              <input class="cb-field__input" id="cb-name" placeholder="e.g. Amara Okafor" required>
+              <span class="cb-field__err">Enter a name.</span>
+            </div>
+            <div class="cb-field">
+              <label class="cb-field__label" for="cb-dob">Date of birth</label>
+              <input class="cb-field__input" id="cb-dob" type="date" required>
+              <span class="cb-field__err">Select a date.</span>
+            </div>
+          </fieldset>
+
+          <!-- The message + photo (the Wall entry itself) -->
+          <fieldset class="cb-group">
+            <legend class="cb-group__h">Your birthday message</legend>
+            <div class="cb-field">
+              <textarea class="cb-field__area" id="cb-msg" maxlength="500" placeholder="Happy birthday! Your joy is contagious…" required></textarea>
+              <span class="cb-field__err">Write a short message.</span>
+            </div>
+            <label class="cb-upload" for="cb-photo">
+              <span class="cb-upload__t"><b>Add a photo</b> — JPG or PNG, up to 5&nbsp;MB</span>
+              <input type="file" id="cb-photo" accept="image/*" hidden>
+            </label>
+          </fieldset>
+
+          <!-- Add-ons: each is an entitlement, gated by the plan + remaining usage -->
+          <fieldset class="cb-group">
+            <legend class="cb-group__h">Add to this celebration</legend>
+            <div class="cb-addons" data-addons></div>
+          </fieldset>
+
+          <div class="cb-consent">
+            <label><input type="checkbox" id="cb-consent" required> I have permission to share these details, and I understand every entry is reviewed before it appears on the Wall.</label>
+          </div>
+
+          <div class="cb-foot">
+            <button class="btn btn--grad btn--lg" type="submit" data-submit>Post to the Wall</button>
+            <p class="cb-foot__note" data-foot-note></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success -->
+      <div class="cb-done" data-done hidden>
+        <div class="cb-done__mark">🎉</div>
+        <h2 class="cb-done__title">Sent for review</h2>
+        <p class="cb-done__text" data-done-text></p>
+        <div class="cb-done__actions">
+          <a class="btn btn--grad" href="wall.html">See the Birthday Wall</a>
+          <button class="btn btn--grey" type="button" data-another>Celebrate someone else</button>
+        </div>
+      </div>
+
+      <!-- Gate: no valid entitlement (used / expired) -->
+      <div class="cb-gate" data-gate hidden>
+        <div class="cb-gate__icon" data-gate-icon></div>
+        <h2 class="cb-gate__title" data-gate-title></h2>
+        <p class="cb-gate__text" data-gate-text></p>
+        <div class="cb-gate__actions" data-gate-actions></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="cb-toast" data-toast></div>
+
+<script src="assets/js/entitlements.js"></script>
+<script src="assets/js/celebrate.js" defer></script>
+</body>
+</html>
